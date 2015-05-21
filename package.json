@@ -1,0 +1,16 @@
+{
+  "name": "notes",
+  "version": "0.0.1",
+  "description": "Notes Application",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/judithgull/notes.git"
+  },
+  "author": "Corinne Roelli, Judith Gull",
+  "homepage": "https://github.com/judithgull/notes",
+  "dependencies": {
+    "finalhandler": "^0.3.6",
+    "serve-static": "^1.9.2"
+  }
+}
