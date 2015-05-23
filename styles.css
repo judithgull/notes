@@ -14,6 +14,29 @@ body {
     float: left;
 }
 
+.label-note-due {
+    float: left;
+    width: 20%;
+}
+
+.note-content-col1 {
+    float: left;
+    width: 20%;
+}
+
+.note-content-col2 {
+    float: left;
+    width: 70%;
+}
+
+.note-content {
+    margin: 10px 0;
+}
+
+.note-content > div {
+    padding: 20px 10px;
+}
+
 /* float hacks*/
 
 #query-box, #main-controls {
