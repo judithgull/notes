@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.btn-display-style, #ck-show-finished {
+    float: right;
+}
+
+.btn-radio-group {
+    float: left;
+}
+
+/* float hacks*/
+
+#query-box, #main-controls {
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+.clearfix:after {
+    content: ".";
+    clear: both;
+    display: block;
+    visibility: hidden;
+    height: 0;
+}
+
+
+
+
+
+

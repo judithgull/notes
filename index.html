@@ -3,7 +3,70 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
+<div id="button-bar">
+
+    <div id="main-controls" class="clearfix">
+        <button id="new-note" name="new-note">Create new Note</button>
+        <div class="btn-display-style">
+            <select id="sel-display-style" name="sel-display-style">
+                <option value="black-white">Black White Style</option>
+                <option value="color">Color Style</option>
+            </select>
+        </div>
+    </div>
+
+    <div id="query-box" class="clearfix">
+
+        <div id="sort-group" class="btn-radio-group">
+            <button name="by-finished">By finish Date</button>
+            <button name="by-created">By created Date</button>
+            <button name="by-importance">By Importance</button>
+        </div>
+
+        <button id="ck-show-finished" class="ck-button" name="show-finished">show finished</button>
+    </div>
+
+</div>
+<content>
+    <!--sample content (should be list of stored items) -->
+    <div class="note-content">
+        <div>Nächsten Mittwoch</div>
+        <div>CAS FEE Selbststudium</div>
+        <div>Important icon 2</div>
+        <input type="checkbox" disabled="disabled" checked="checked">
+
+        <div>
+            HTML für die Note App erstellen.<br>
+            CSS erstellen für die Note App.
+        </div>
+        <button name="edit">Edit</button>
+    </div>
+    <div class="note-content">
+        <div>Heute</div>
+        <div>Einkaufen</div>
+        <div>Important icon 1</div>
+        <input type="checkbox" disabled="disabled" checked="checked">
+
+        <div>
+            HTML für die Note App erstellen.<br>
+            CSS erstellen für die Note App.
+        </div>
+        <button name="edit">Edit</button>
+    </div>
+    <div class="note-content">
+        <div>Irgendwann</div>
+        <div>Mami anrufen</div>
+        <div>nicht wichtig</div>
+        <input type="checkbox" disabled="disabled" checked="checked">
+
+        <div>
+            888 888 88 88
+        </div>
+        <button name="edit">Edit</button>
+    </div>
+</content>
 </body>
 </html>
