@@ -5,18 +5,23 @@
     <title></title>
 </head>
 <body>
-<form>
-    <label for="in-note-title">Title</label>
-    <input id="in-note-title" type="text" value="...">
-    <label for="in-note-desc">Description</label>
-    <textarea id="in-note-desc">HTML pr die note App erstellen,CSS erstellen...</textarea>
+<form action="index.html" onsubmit="send()">
+    <label for="n-title">Title</label>
+    <input id="n-title" type="text" value="...">
+
+    <label for="n-desc">Description</label>
+    <textarea id="n-desc">HTML pr die note App erstellen,CSS erstellen...</textarea>
+
     <label>Importance</label>
-    <label>...</label>
-    <label>Due date:</label>
-    <input id="in-note-due" type="date">
-    <button>Save</button>
-    <button>Cancel</button>
+    <label id="n-importance">...</label>
+
+    <label for="n-due-date">Due date:</label>
+    <input id="n-due-date" type="date">
+
+    <button type="submit">Save</button>
+    <button type="button">Cancel</button>
 </form>
 
+<script src="newNote.js"></script>
 </body>
 </html>
