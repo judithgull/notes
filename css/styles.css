@@ -23,6 +23,10 @@ body {
     margin: 0 auto;
 }
 
+.l-align--right {
+    float: right;
+}
+
 .l-clearfix:after {
     content: ".";
     clear: both;
@@ -59,6 +63,17 @@ body {
 .section-notes {
     padding: 1em;
 }
+
+/* Buttons */
+.btn {
+
+}
+
+/* Dropdowns */
+.dropdown {
+
+}
+
 .btn-display-style, #ck-show-finished {
     float: right;
 }

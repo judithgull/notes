@@ -9,18 +9,16 @@
         <h1 class="is-hidden">Simple Note App</h1>
         <section class="section-notes l-site-width">
             <h2 class="is-hidden">Notes Section</h2>
-            <div id="button-bar">
+            <button class="btn" name="new-note" onclick="location.href='note.html'">Create new Note</button>
+            <div class="l-align--right dropdown l-clearfix">
+                <label for="sel-display-style"></label>
+                <select id="sel-display-style" name="sel-display-style">
+                    <option value="black-white">Black White Style</option>
+                    <option value="color">Color Style</option>
+                </select>
+            </div>
 
-                <div id="main-controls" class="l-clearfix">
-                    <button id="new-note" name="new-note" onclick="location.href='note.html'">Create new Note</button>
 
-                    <div class="btn-display-style">
-                        <select id="sel-display-style" name="sel-display-style">
-                            <option value="black-white">Black White Style</option>
-                            <option value="color">Color Style</option>
-                        </select>
-                    </div>
-                </div>
 
                 <div id="query-box" class="l-clearfix">
 
@@ -33,7 +31,6 @@
                     <button id="ck-show-finished" class="ck-button" name="show-finished">show finished</button>
                 </div>
 
-            </div>
             <content>
                 <!--sample content (should be list of stored items) -->
                 <div class="note-content l-clearfix">
