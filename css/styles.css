@@ -103,6 +103,19 @@ ul {
  *******************/
 
 /*******************
+ * Icons
+ *
+ * i: icon
+ *******************/
+.i-group {
+    display: inline-block;
+}
+
+.i-bolt {
+
+}
+
+/*******************
  * Modules
  *******************/
 
@@ -158,3 +171,8 @@ ul {
     border-right: 1px solid gray;
 }
 
+/* Notes List */
+.note-title {
+    display: inline-block;
+    width: 80%;
+}
