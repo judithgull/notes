@@ -122,6 +122,10 @@ ul {
     cursor: pointer;
 }
 
+.btn--full {
+    width: 100%;
+}
+
 /* Dropdowns */
 .dropdown {
 
