@@ -8,6 +8,7 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
 }
 
 /* reset css */
@@ -79,10 +80,11 @@ ul {
  * t: typography
  *******************/
 
+.t-title,
+.t-date,
 .t-paragraph {
-    padding: 0;
     margin: 0 0 1rem;
-    font-size: 16px;
+    font-size: 1em;
 }
 
 .t-paragraph:last-of-type {
