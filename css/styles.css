@@ -54,6 +54,11 @@ body {
 /*******************
  * Modules
  *******************/
+
+/* Section Notes */
+.section-notes {
+    padding: 1em;
+}
 .btn-display-style, #ck-show-finished {
     float: right;
 }
