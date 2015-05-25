@@ -42,6 +42,10 @@ ul {
     clear: both;
 }
 
+.l-space-bottom--medium {
+    margin-bottom: 2rem;
+}
+
 /*******************
  * Helpers
  *******************/
@@ -56,6 +60,9 @@ ul {
  * t: typography
  *******************/
 
+.t-paragraph {
+    font-size: 16px;
+}
 /*******************
  * Color
  *
