@@ -28,6 +28,10 @@ body {
  * Helpers
  *******************/
 
+.is-hidden {
+    display: none;
+}
+
 /*******************
  * Typography
  *
