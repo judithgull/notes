@@ -15,6 +15,12 @@ function send() {
     return true;
 }
 
+function storeImportance(index) {
+    console.log("storeImportance" + index);
+    //TODO...
+    return false;
+}
+
 /*
  * Create a new note object with the form data
  * */
