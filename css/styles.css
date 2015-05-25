@@ -1,3 +1,7 @@
+/*******************
+ * Base
+ *******************/
+
 * {
     box-sizing: border-box;
 }
@@ -6,6 +10,39 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+/*******************
+ * Layout
+ *
+ * l: layout
+ *******************/
+
+.l-clearfix:after {
+    content: ".";
+    clear: both;
+    display: block;
+    visibility: hidden;
+    height: 0;
+}
+
+/*******************
+ * Helpers
+ *******************/
+
+/*******************
+ * Typography
+ *
+ * t: typography
+ *******************/
+
+/*******************
+ * Color
+ *
+ * c: color
+ *******************/
+
+/*******************
+ * Modules
+ *******************/
 .btn-display-style, #ck-show-finished {
     float: right;
 }
@@ -74,10 +111,3 @@ form input, form textarea {
     margin: 10px 0;
 }
 
-.clearfix:after {
-    content: ".";
-    clear: both;
-    display: block;
-    visibility: hidden;
-    height: 0;
-}
