@@ -23,62 +23,80 @@
                 </div>
             </div>
 
+            <div class="notes-wrap">
+                <section class="nav-filter l-clearfix l-space-bottom--medium">
+                    <h2 class="is-hidden">Sorting of the note list.</h2>
 
-                <div id="query-box" class="l-clearfix">
+                    <a href="#" class="l-align--right t-link" name="show-finished">show finished</a>
 
-                    <div id="sort-group" class="btn-radio-group">
-                        <button name="by-finished">By finish Date</button>
-                        <button name="by-created">By created Date</button>
-                        <button name="by-importance">By Importance</button>
-                    </div>
+                    <ul class="tabs-list">
+                        <li class="tab-item">
+                            <a href="#" class="t-link">By finish Date</a>
+                        </li>
+                        <li class="tab-item">
+                            <a href="#" class="t-link">By created Date</a>
+                        </li>
+                        <li class="tab-item">
+                            <a href="#" class="t-link">By Importance</a>
+                        </li>
+                    </ul>
+                </section>
 
-                    <button id="ck-show-finished" class="ck-button" name="show-finished">show finished</button>
-                </div>
+                <ul class="notes-list">
+                    <!--sample content (should be list of stored items) -->
+                    <li class="note-list-item l-space-bottom--medium">
+                        <article class="l-table">
+                            <div class="l-table-cell l-column-1">
+                                <p class="t-paragraph">Nächsten Mittwoch</p>
+                                <input id="ck-finished-3" type="checkbox" disabled="disabled" checked="checked">
+                                <label for="ck-finished-3">Finished [Today]</label>
+                            </div>
 
-            <content>
-                <!--sample content (should be list of stored items) -->
-                <div class="note-content l-clearfix">
-                    <div class="note-content-col1">
-                        <div>Nächsten Mittwoch</div>
-                        <input id="ck-finished-3" type="checkbox" disabled="disabled" checked="checked">
-                        <label for="ck-finished-3">Finished [Today]</label>
-                    </div>
+                            <div class="l-table-cell l-column-2">
+                                <p class="t-paragraph">CAS FEE Selbststudium</p>
+                                <p class="t-paragraph">HTML für die Note App erstellen.<br> CSS erstellen für die Note App.</p>
+                            </div>
+                            <div class="l-table-cell l-column-3">
+                                <button name="edit">Edit</button>
+                            </div>
+                        </article>
+                    </li>
+                    <li class="note-list-item l-space-bottom--medium">
+                        <article class="l-table">
+                            <div class="l-table-cell l-column-1">
+                                <p class="t-paragraph">Heute</p>
+                                <input id="ck-finished-3" type="checkbox" disabled="disabled">
+                                <label for="ck-finished-3">Finished</label>
+                            </div>
+                            <div class="l-table-cell l-column-2">
+                                <p class="t-paragraph">Einkaufen</p>
+                                <p class="t-paragraph">Butter<br> Eier</p>
+                            </div>
+                            <div class="l-table-cell l-column-3">
+                                <button name="edit">Edit</button>
+                            </div>
+                        </article>
+                    </li>
+                    <li class="note-list-item l-space-bottom--medium">
+                        <article class="l-table">
+                            <div class="l-table-cell l-column-1">
+                                <p class="t-paragraph">Irgendwann</p>
+                                <input id="ck-finished-3" type="checkbox" disabled="disabled">
+                                <label for="ck-finished-3">Finished</label>
+                            </div>
+                            <div class="l-table-cell l-column-2">
+                                <p class="t-paragraph">Mami anrufen</p>
+                                <p class="t-paragraph">888 888 88 88</p>
+                            </div>
+                            <div class="l-table-cell l-column-3">
+                                <button name="edit">Edit</button>
+                            </div>
+                        </article>
+                    </li>
 
-                    <div class="note-content-col2">
-                        <div>CAS FEE Selbststudium</div>
-                        <div>HTML für die Note App erstellen.<br>
-                            CSS erstellen für die Note App.
-                        </div>
-                    </div>
-                    <button name="edit">Edit</button>
-                </div>
-                <div class="note-content l-clearfix">
-                    <div class="note-content-col1">
-                        <div>Heute</div>
-                        <input id="ck-finished-3" type="checkbox" disabled="disabled">
-                        <label for="ck-finished-3">Finished</label>
-                    </div>
-                    <div class="note-content-col2">
-                        <div>Einkaufen</div>
-                        <div>Butter<br>
-                            Eier
-                        </div>
-                    </div>
-                    <button name="edit">Edit</button>
-                </div>
-                <div class="note-content l-clearfix">
-                    <div class="note-content-col1">
-                        <div>Irgendwann</div>
-                        <input id="ck-finished-3" type="checkbox" disabled="disabled">
-                        <label for="ck-finished-3">Finished</label>
-                    </div>
-                    <div class="note-content-col2">
-                        <div>Mami anrufen</div>
-                        <div>888 888 88 88</div>
-                    </div>
-                    <button name="edit">Edit</button>
-                </div>
-            </content>
+                </ul>
+            </div>
+
         </section>
     <script src="js/listNotes.js"></script>
     </body>

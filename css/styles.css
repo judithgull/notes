@@ -20,6 +20,7 @@ body {
 ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 /*******************
@@ -31,6 +32,24 @@ ul {
 .l-site-width {
     max-width: 900px;
     margin: 0 auto;
+}
+
+.l-table {
+    display: table;
+    width: 100%;
+}
+
+.l-table-cell {
+    display: table-cell;
+}
+
+.l-column-1,
+.l-column-3 {
+    width: 20%;
+}
+
+.l-column-2 {
+    width: 60%;
 }
 
 .l-align--right {
@@ -61,8 +80,20 @@ ul {
  *******************/
 
 .t-paragraph {
+    padding: 0;
+    margin: 0 0 1rem;
     font-size: 16px;
 }
+
+.t-paragraph:last-of-type {
+    margin-bottom: 0;
+}
+
+.t-link {
+    text-decoration: none;
+    color: cadetblue;
+}
+
 /*******************
  * Color
  *
@@ -80,13 +111,47 @@ ul {
 
 /* Buttons */
 .btn {
+    padding: 1em;
 
+    background-color: white;
+    border: 1px solid cadetblue;
+    border-radius: 5px;
+
+    cursor: pointer;
 }
 
 /* Dropdowns */
 .dropdown {
 
 }
+
+/* Tabs List */
+.tabs-list {
+    width: 80%;
+    font-size: 0.001px; /* This removes the space between inline-blocks.*/
+}
+
+.tab-item {
+    display: inline-block;
+    width: 33.333%;
+    font-size: 16px;
+}
+
+.nav-filter .t-link {
+    display: block;
+    padding: 1em;
+
+    border: 1px solid gray;
+}
+
+.nav-filter .tab-item .t-link {
+    border-right: none;
+}
+
+.nav-filter .tab-item:last-child .t-link {
+    border-right: 1px solid gray;
+}
+
 
 .btn-display-style, #ck-show-finished {
     float: right;
