@@ -26,8 +26,8 @@ function storeImportance(index) {
  * */
 function createNote() {
     var note = {};
-    note.title = document.getElementById("n-title").value;
-    note.description = document.getElementById("n-desc").value;
-    note.dueDate = document.getElementById("n-due-date").value;
+    note.title = document.getElementById("note-title").value;
+    note.description = document.getElementById("note-description").value;
+    note.dueDate = document.getElementById("note-due-date").value;
     return note;
 }

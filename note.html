@@ -1,44 +1,47 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Create new note</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
-</head>
-<body>
-<form action="index.html" onsubmit="send()">
-    <div>
-        <label for="n-title">Title</label>
-        <input id="n-title" type="text" value="...">
-    </div>
-    <div>
-        <label for="n-desc">Description</label>
-        <textarea id="n-desc">HTML pr die note App erstellen,CSS erstellen...</textarea>
-    </div>
-    <div>
-        <label>Importance</label>
-        <fieldset class="importance-group">
-            <input formaction="note.html" onclick="storeImportance(0)" id="n-imp-1" type="image" src="img/bolt.svg"
-                   width="10" height="20">
-            <input formaction="note.html" onclick="storeImportance(1)" id="n-imp-2" type="image" src="img/bolt.svg"
-                   width="10" height="20">
-            <input formaction="note.html" onclick="storeImportance(2)" id="n-imp-3" type="image" src="img/bolt.svg"
-                   width="10" height="20">
-            <input formaction="note.html" onclick="storeImportance(3)" id="n-imp-4" type="image" src="img/bolt.svg"
-                   width="10" height="20">
-            <input formaction="note.html" onclick="storeImportance(4)" id="n-imp-5" type="image" src="img/bolt.svg"
-                   width="10" height="20">
-        </fieldset>
-    </div>
-    <div>
-        <label for="n-due-date">Due date:</label>
-        <input id="n-due-date" type="date">
-    </div>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Create new note</title>
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
+    </head>
+    <body>
+    <article class="article l-site-width">
+        <form id="note" action="index.html" onsubmit="send()">
+            <div>
+                <label for="note-title">Title</label>
+                <input id="note-title" type="text" value="...">
+            </div>
+            <div>
+                <label for="note-description">Description</label>
+                <textarea id="note-description">HTML pr die note App erstellen,CSS erstellen...</textarea>
+            </div>
+            <div>
+                <label>Importance</label>
+                <fieldset class="importance-group">
+                    <input formaction="note.html" onclick="storeImportance(0)" id="n-imp-1" type="image" src="img/bolt.svg"
+                           width="10" height="20">
+                    <input formaction="note.html" onclick="storeImportance(1)" id="n-imp-2" type="image" src="img/bolt.svg"
+                           width="10" height="20">
+                    <input formaction="note.html" onclick="storeImportance(2)" id="n-imp-3" type="image" src="img/bolt.svg"
+                           width="10" height="20">
+                    <input formaction="note.html" onclick="storeImportance(3)" id="n-imp-4" type="image" src="img/bolt.svg"
+                           width="10" height="20">
+                    <input formaction="note.html" onclick="storeImportance(4)" id="n-imp-5" type="image" src="img/bolt.svg"
+                           width="10" height="20">
+                </fieldset>
+            </div>
+            <div>
+                <label for="note-due-date">Due date:</label>
+                <input id="note-due-date" type="date">
+            </div>
 
-    <button type="submit">Save</button>
-    <button type="button">Cancel</button>
-</form>
+            <button type="submit" value="Submit">Save</button>
+            <button type="cancel">Cancel</button>
 
-<script src="js/newNote.js"></script>
-</body>
+        </form>
+    </article>
+
+    <script src="js/newNote.js"></script>
+    </body>
 </html>
