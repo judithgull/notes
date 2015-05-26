@@ -190,3 +190,11 @@ ul {
 .show-more {
     display: inline-block;
 }
+
+
+/* Article Note Detail Page */
+
+.article {
+    padding: 1em;
+}
+
