@@ -40,6 +40,10 @@ ul {
     width: 100%;
 }
 
+.l-table-row {
+    display: table-row;
+}
+
 .l-table-cell {
     display: table-cell;
 }
@@ -197,4 +201,20 @@ ul {
 .article {
     padding: 1em;
 }
+
+.input,
+.textarea {
+    width: 100%;
+    border: 1px solid #999;
+}
+
+.textarea {
+    display: block;
+    height: 100px;
+}
+
+.importance-group {
+    border: none;
+}
+
 
