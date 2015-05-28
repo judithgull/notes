@@ -1,74 +1,81 @@
 <!DOCTYPE html>
 <html>
-    <head lang="en">
-        <meta charset="UTF-8">
-        <title>Create new note</title>
-        <link rel="stylesheet" type="text/css" href="css/styles.css">
-    </head>
-    <body>
-    <article class="article l-site-width">
-        <h2 class="is-hidden">Note</h2>
-        <form id="note" class="form" action="index.html" onsubmit="send()">
-            <div class="l-table l-space-bottom--medium">
-                <div class="l-table-row">
-                    <div class="l-table-cell l-column-1">
-                        <label for="note-title" class="label t-title">Title</label>
-                    </div>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Create new note</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+<body>
+<article class="article l-site-width">
+    <h2 class="is-hidden">Note</h2>
 
-                    <div class="l-table-cell l-column-2">
-                        <input id="note-title" type="text" value="..." class="input l-space-bottom--medium">
-                    </div>
+    <form id="note" class="form" action="index.html" onsubmit="send()">
+        <div class="l-table l-space-bottom--medium">
+            <div class="l-table-row">
+                <div class="l-table-cell l-column-1">
+                    <label for="note-title" class="label t-title">Title</label>
                 </div>
-                <div class="l-table-row">
-                    <div class="l-table-cell l-column-1">
-                        <label for="note-description">Description</label>
-                    </div>
 
-                    <div class="l-table-cell l-column-2">
-                        <textarea id="note-description" class="textarea l-space-bottom--medium">HTML pr die note App erstellen,CSS erstellen...</textarea>
-                    </div>
-                </div>
-                <div class="l-table-row">
-                    <div class="l-table-cell l-column-1">
-                        <label for="note-importance">Importance</label>
-                    </div>
-
-                    <div class="l-table-cell l-column-2">
-                        <fieldset id="note-importance" class="importance-group l-space-bottom--medium"">
-                            <input formaction="note.html" onclick="storeImportance(0)" id="n-imp-1" type="image" src="img/bolt.svg"
-                                   width="10" height="20">
-                            <input formaction="note.html" onclick="storeImportance(1)" id="n-imp-2" type="image" src="img/bolt.svg"
-                                   width="10" height="20">
-                            <input formaction="note.html" onclick="storeImportance(2)" id="n-imp-3" type="image" src="img/bolt.svg"
-                                   width="10" height="20">
-                            <input formaction="note.html" onclick="storeImportance(3)" id="n-imp-4" type="image" src="img/bolt.svg"
-                                   width="10" height="20">
-                            <input formaction="note.html" onclick="storeImportance(4)" id="n-imp-5" type="image" src="img/bolt.svg"
-                                   width="10" height="20">
-                        </fieldset>
-                    </div>
-                </div>
-                <div class="l-table-row">
-                    <div class="l-table-cell l-column-1">
-                        <label for="note-due-date">Due date:</label>
-                    </div>
-
-                    <div class="l-table-cell l-column-2">
-                        <input id="note-due-date" type="date">
-                    </div>
+                <div class="l-table-cell l-column-2">
+                    <input id="note-title" type="text" value="..." class="input l-space-bottom--medium">
                 </div>
             </div>
+            <div class="l-table-row">
+                <div class="l-table-cell l-column-1">
+                    <label for="note-description">Description</label>
+                </div>
 
-            <button class="btn btn--full l-space-bottom--medium" type="submit" value="Submit" name="save">
-                <span class="t-paragraph">Save</span>
-            </button>
-            <button class="btn" type="cancel" value="Cancel" name="cancel">
-                <span class="t-paragraph">Cancel</span>
-            </button>
+                <div class="l-table-cell l-column-2">
+                    <textarea id="note-description" class="textarea l-space-bottom--medium">HTML pr die note App erstellen,CSS erstellen...</textarea>
+                </div>
+            </div>
+            <div class="l-table-row">
+                <div class="l-table-cell l-column-1">
+                    <label for="note-importance">Importance</label>
+                </div>
 
-        </form>
-    </article>
+                <div class="l-table-cell l-column-2">
+                    <fieldset id="note-importance" class="importance-group l-space-bottom--medium"
+                    ">
+                    <input formaction="note.html" onclick="storeImportance(0)" id="n-imp-1" type="image"
+                           src="img/bolt.svg"
+                           width="10" height="20">
+                    <input formaction="note.html" onclick="storeImportance(1)" id="n-imp-2" type="image"
+                           src="img/bolt.svg"
+                           width="10" height="20">
+                    <input formaction="note.html" onclick="storeImportance(2)" id="n-imp-3" type="image"
+                           src="img/bolt.svg"
+                           width="10" height="20">
+                    <input formaction="note.html" onclick="storeImportance(3)" id="n-imp-4" type="image"
+                           src="img/bolt.svg"
+                           width="10" height="20">
+                    <input formaction="note.html" onclick="storeImportance(4)" id="n-imp-5" type="image"
+                           src="img/bolt.svg"
+                           width="10" height="20">
+                    </fieldset>
+                </div>
+            </div>
+            <div class="l-table-row">
+                <div class="l-table-cell l-column-1">
+                    <label for="note-due-date">Due date:</label>
+                </div>
 
-    <script src="js/newNote.js"></script>
-    </body>
+                <div class="l-table-cell l-column-2">
+                    <input id="note-due-date" type="date">
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn--full l-space-bottom--medium" type="submit" value="Submit" name="save">
+            <span class="t-paragraph">Save</span>
+        </button>
+        <button class="btn" type="cancel" value="Cancel" name="cancel">
+            <span class="t-paragraph">Cancel</span>
+        </button>
+
+    </form>
+</article>
+
+<script src="js/newNote.js"></script>
+</body>
 </html>

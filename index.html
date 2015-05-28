@@ -1,126 +1,130 @@
 <!DOCTYPE html>
 <html>
-    <head lang="en">
-        <meta charset="UTF-8">
-        <title>Simple Notes App</title>
-        <link rel="stylesheet" type="text/css" href="css/styles.css">
-    </head>
-    <body>
-        <h1 class="is-hidden">Simple Note App</h1>
-        <section class="section-notes l-site-width">
-            <h2 class="is-hidden">Notes Section</h2>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Simple Notes App</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+<body>
+<h1 class="is-hidden">Simple Note App</h1>
+<section class="section-notes l-site-width">
+    <h2 class="is-hidden">Notes Section</h2>
 
-            <div class="l-space-bottom--medium">
-                <button class="btn" name="new-note" onclick="location.href='note.html'">
-                    <span class="t-paragraph">Create new Note</span>
-                </button>
-                <div class="l-align--right dropdown l-clearfix">
-                    <label for="sel-display-style"></label>
-                    <select id="sel-display-style" name="sel-display-style">
-                        <option value="black-white">Black White Style</option>
-                        <option value="color">Color Style</option>
-                    </select>
-                </div>
-            </div>
+    <div class="l-space-bottom--medium">
+        <button class="btn" name="new-note" onclick="location.href='note.html'">
+            <span class="t-paragraph">Create new Note</span>
+        </button>
+        <div class="l-align--right dropdown l-clearfix">
+            <label for="sel-display-style"></label>
+            <select id="sel-display-style" name="sel-display-style">
+                <option value="black-white">Black White Style</option>
+                <option value="color">Color Style</option>
+            </select>
+        </div>
+    </div>
 
-            <div class="notes-wrap">
-                <section class="nav-filter l-clearfix l-space-bottom--medium">
-                    <h2 class="is-hidden">Sorting of the note list.</h2>
+    <div class="notes-wrap">
+        <section class="nav-filter l-clearfix l-space-bottom--medium">
+            <h2 class="is-hidden">Sorting of the note list.</h2>
 
-                    <a href="#" class="l-align--right t-link" name="show-finished">show finished</a>
+            <a href="#" class="l-align--right t-link" name="show-finished">show finished</a>
 
-                    <ul class="tabs-list">
-                        <li class="tab-item">
-                            <a href="#" class="t-link">By finish Date</a>
-                        </li>
-                        <li class="tab-item">
-                            <a href="#" class="t-link">By created Date</a>
-                        </li>
-                        <li class="tab-item">
-                            <a href="#" class="t-link">By Importance</a>
-                        </li>
-                    </ul>
-                </section>
-
-                <ul class="notes-list">
-                    <!--sample content (should be list of stored items) -->
-                    <li class="note-list-item l-space-bottom--medium">
-                        <article class="l-table">
-                            <div class="l-table-cell l-column-1">
-                                <p class="note-due-date t-date">Nächsten Mittwoch</p>
-                                <input id="note-3" type="checkbox" checked="checked">
-                                <label for="note-3">Finished [Today]</label>
-                            </div>
-
-                            <div class="l-table-cell l-column-2">
-                                <h3 class="note-title t-title">CAS FEE Selbststudium</h3>
-                                <div class="i-group">
-                                    <img class="i-bolt" src="img/bolt.svg">
-                                    <img class="i-bolt" src="img/bolt.svg">
-                                </div>
-                                <div class="js-content hide-content">
-                                    <p class="note-description t-paragraph">HTML für die Note App erstellen.<br> CSS erstellen für die Note App.<br> more text</p>
-                                </div>
-                                <div class="show-more">
-                                    <a href="#" class="t-link">Show more</a>
-                                </div>
-                            </div>
-                            <div class="l-table-cell l-column-3">
-                                <button class="btn btn--full" name="edit" onclick="location.href='note.html'">
-                                    <span class="t-paragraph">Edit</span>
-                                </button>
-                            </div>
-                        </article>
-                    </li>
-                    <li class="note-list-item l-space-bottom--medium">
-                        <article class="l-table">
-                            <div class="l-table-cell l-column-1">
-                                <p class="t-date">Heute</p>
-                                <input id="note-2" type="checkbox">
-                                <label for="note-2">Finished</label>
-                            </div>
-                            <div class="l-table-cell l-column-2">
-                                <h3 class="note-title t-title">Einkaufen</h3>
-                                <div class="i-group">
-                                    <img class="i-bolt" src="img/bolt.svg">
-                                </div>
-                                <div class="js-content hide-content">
-                                    <p class="note-description t-paragraph">Butter<br> Eier</p>
-                                </div>
-                                <div class="show-more">
-                                    <a href="#" class="t-link">Show more</a>
-                                </div>
-                            </div>
-                            <div class="l-table-cell l-column-3">
-                                <button class="btn btn--full" name="edit" onclick="location.href='note.html'">
-                                    <span class="t-paragraph">Edit</span>
-                                </button>
-                            </div>
-                        </article>
-                    </li>
-                    <li class="note-list-item l-space-bottom--medium">
-                        <article class="l-table">
-                            <div class="l-table-cell l-column-1">
-                                <p class="t-date">Irgendwann</p>
-                                <input id="note-1" type="checkbox">
-                                <label for="note-1">Finished</label>
-                            </div>
-                            <div class="l-table-cell l-column-2">
-                                <h3 class="note-title t-title">Mami anrufen</h3>
-                                <p class="note-description t-paragraph">888 888 88 88</p>
-                            </div>
-                            <div class="l-table-cell l-column-3">
-                                <button class="btn btn--full" name="edit" onclick="location.href='note.html'">
-                                    <span class="t-paragraph">Edit</span>
-                                </button>
-                            </div>
-                        </article>
-                    </li>
-
-                </ul>
-            </div>
-
+            <ul class="tabs-list">
+                <li class="tab-item">
+                    <a href="#" class="t-link">By finish Date</a>
+                </li>
+                <li class="tab-item">
+                    <a href="#" class="t-link">By created Date</a>
+                </li>
+                <li class="tab-item">
+                    <a href="#" class="t-link">By Importance</a>
+                </li>
+            </ul>
         </section>
-    <script src="js/listNotes.js"></script>
-    </body>
+
+        <ul class="notes-list">
+            <!--sample content (should be list of stored items) -->
+            <li class="note-list-item l-space-bottom--medium">
+                <article class="l-table">
+                    <div class="l-table-cell l-column-1">
+                        <p class="note-due-date t-date">Nächsten Mittwoch</p>
+                        <input id="note-3" type="checkbox" checked="checked">
+                        <label for="note-3">Finished [Today]</label>
+                    </div>
+
+                    <div class="l-table-cell l-column-2">
+                        <h3 class="note-title t-title">CAS FEE Selbststudium</h3>
+
+                        <div class="i-group">
+                            <img class="i-bolt" src="img/bolt.svg">
+                            <img class="i-bolt" src="img/bolt.svg">
+                        </div>
+                        <div class="js-content hide-content">
+                            <p class="note-description t-paragraph">HTML für die Note App erstellen.<br> CSS erstellen
+                                für die Note App.<br> more text</p>
+                        </div>
+                        <div class="show-more">
+                            <a href="#" class="t-link">Show more</a>
+                        </div>
+                    </div>
+                    <div class="l-table-cell l-column-3">
+                        <button class="btn btn--full" name="edit" onclick="location.href='note.html'">
+                            <span class="t-paragraph">Edit</span>
+                        </button>
+                    </div>
+                </article>
+            </li>
+            <li class="note-list-item l-space-bottom--medium">
+                <article class="l-table">
+                    <div class="l-table-cell l-column-1">
+                        <p class="t-date">Heute</p>
+                        <input id="note-2" type="checkbox">
+                        <label for="note-2">Finished</label>
+                    </div>
+                    <div class="l-table-cell l-column-2">
+                        <h3 class="note-title t-title">Einkaufen</h3>
+
+                        <div class="i-group">
+                            <img class="i-bolt" src="img/bolt.svg">
+                        </div>
+                        <div class="js-content hide-content">
+                            <p class="note-description t-paragraph">Butter<br> Eier</p>
+                        </div>
+                        <div class="show-more">
+                            <a href="#" class="t-link">Show more</a>
+                        </div>
+                    </div>
+                    <div class="l-table-cell l-column-3">
+                        <button class="btn btn--full" name="edit" onclick="location.href='note.html'">
+                            <span class="t-paragraph">Edit</span>
+                        </button>
+                    </div>
+                </article>
+            </li>
+            <li class="note-list-item l-space-bottom--medium">
+                <article class="l-table">
+                    <div class="l-table-cell l-column-1">
+                        <p class="t-date">Irgendwann</p>
+                        <input id="note-1" type="checkbox">
+                        <label for="note-1">Finished</label>
+                    </div>
+                    <div class="l-table-cell l-column-2">
+                        <h3 class="note-title t-title">Mami anrufen</h3>
+
+                        <p class="note-description t-paragraph">888 888 88 88</p>
+                    </div>
+                    <div class="l-table-cell l-column-3">
+                        <button class="btn btn--full" name="edit" onclick="location.href='note.html'">
+                            <span class="t-paragraph">Edit</span>
+                        </button>
+                    </div>
+                </article>
+            </li>
+
+        </ul>
+    </div>
+
+</section>
+<script src="js/listNotes.js"></script>
+</body>
 </html>
