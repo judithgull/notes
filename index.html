@@ -7,12 +7,14 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script type="text/javascript"
             src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0/handlebars.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
     <script id="notes-entry-template" type="text/x-handlebars-template">
         {{#each this}}
         <li class="note-list-item l-space-bottom--medium">
             <article class="l-table">
                 <div class="l-table-cell l-column-1">
-                    <p class="note-due-date t-date">date</p>
+                    <p class="note-due-date t-date">{{{formatDate dueDate}}}</p>
                     <input type="checkbox" checked="checked">
                     <label for="note-3">Finished [Today]</label>
                 </div>
