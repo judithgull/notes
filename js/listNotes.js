@@ -11,8 +11,8 @@ $(function () {
     var createNotesHtml = Handlebars.compile($("#notes-entry-template").html());
 
     notes = notes.sort(compareNotesByImportance);
-    notes = notes.sort(compareByCreationDate);
     notes = notes.sort(compareByCompletionDate);
+    notes = notes.sort(compareByCreationDate);
 
     document.getElementById("js-notes-list").innerHTML = createNotesHtml(notes);
 });
@@ -27,22 +27,29 @@ function compareNotesByImportance(n1, n2) {
  * Compares notes by creation date. Last date first.
  * */
 function compareByCreationDate(n1, n2) {
-    return moment(n2.creationDate).valueOf() - moment(n1.creationDate).valueOf();
+    return compareDatesDesc(n1.creationDate, n2.creationDate);
 }
 
 /**
  * Compares notes by completion date. Last date first. Null values last.
  * */
 function compareByCompletionDate(n1, n2) {
-    if (n1.completionDate === null && n2.completionDate === null) {
+    return compareDatesDesc(n1.completionDate, n2.completionDate);
+}
+
+/**
+ * Compares two dates: last date first, null values last.
+ * */
+function compareDatesDesc(date1, date2) {
+    if (date1 === null && date2 === null) {
         return 0;
     }
-    else if (n1.completionDate === null) {
+    else if (date1 === null) {
         return 1;
-    } else if (n2.completionDate === null) {
+    } else if (date2 === null) {
         return -1;
     }
-    return moment(n2.completionDate).valueOf() - moment(n1.completionDate).valueOf();
+    return moment(date2).valueOf() - moment(date1).valueOf();
 }
 
 /**
