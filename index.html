@@ -22,8 +22,9 @@
                     <h3 class="note-title t-title">{{title}}</h3>
 
                     <div class="i-group">
+                        {{#repeat importance}}
                         <img class="i-bolt" src="img/bolt.svg">
-                        <img class="i-bolt" src="img/bolt.svg">
+                        {{/repeat}}
                     </div>
                     <div class="js-content hide-content">
                         <p class="note-description t-paragraph">{{description}}</p>

@@ -6,6 +6,13 @@ $(function () {
     var notes = JSON.parse(notesStr);
     console.log("Current notes in session store:", notes);
 
+    Handlebars.registerHelper('repeat', function (n, block) {
+        var res = "";
+        for (var i = 0; i < n; ++i)
+            res += block.fn(i);
+        return res;
+    });
+
     moment.locale("de-CH"); //TODO use browser locale
     Handlebars.registerHelper("formatDate", formatDate);
     var createNotesHtml = Handlebars.compile($("#notes-entry-template").html());
