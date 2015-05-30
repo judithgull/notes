@@ -160,6 +160,14 @@ ul {
     font-size: 16px;
 }
 
+.tab-item--active{
+    background-color:steelblue;
+}
+
+.tab-item--active .t-link{
+    color:white;
+}
+
 .nav-filter .t-link {
     display: block;
     padding: 1em;
