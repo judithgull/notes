@@ -14,8 +14,20 @@ $(function () {
     notes = notes.sort(compareByCompletionDate);
     notes = notes.sort(compareByCreationDate);
 
+    $("#sort-tabs").on("click", function () {
+        function activateOnly(id, activeMarker) {
+            $("." + activeMarker).toggleClass(activeMarker);
+            $("#" + id).toggleClass(activeMarker);
+        }
+
+        //remove active class
+        var selectedId = event.toElement.id;
+        activateOnly(selectedId, "tab-item--active");
+
+    });
     document.getElementById("js-notes-list").innerHTML = createNotesHtml(notes);
 });
+
 
 /**
  * Compares notes by importance. Most important first.

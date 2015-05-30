@@ -28,7 +28,7 @@ function storeImportance(index) {
  * */
 function createNote() {
     var note = {};
-    note.id = 0; //TODO
+    note.id = 0; //TODO last of stored items + 1
     note.title = document.getElementById("note-title").value;
     note.description = document.getElementById("note-description").value;
     note.creationDate = new Date();
