@@ -10,43 +10,47 @@ $(function () {
     registerHandlebarsHelpers();
     var createNotesHtml = Handlebars.compile($("#notes-entry-template").html());
 
-    notes = notes.sort(compareNotesByImportance);
-    notes = notes.sort(compareByCompletionDate);
-    notes = notes.sort(compareByCreationDate);
-
     $("#sort-tabs").on("click", function () {
         function activateOnly(id, activeMarker) {
             $("." + activeMarker).toggleClass(activeMarker);
             $("#" + id).toggleClass(activeMarker);
         }
 
-        //remove active class
         var selectedId = event.toElement.id;
         activateOnly(selectedId, "tab-item--active");
 
+        var sortOrder = getSortOrder(selectedId);
+        setNotesHtml(notes.sort(sortOrder));
+
     });
-    document.getElementById("js-notes-list").innerHTML = createNotesHtml(notes);
+    setNotesHtml(notes);
+
+    /**
+     * Applies the notes data to the template and sets the generated HTML to the notes list.
+     * */
+    function setNotesHtml(notes) {
+        document.getElementById("js-notes-list").innerHTML = createNotesHtml(notes);
+    }
 });
 
-
 /**
- * Compares notes by importance. Most important first.
+ * Returns a sort comparator function for a given id.
  * */
-function compareNotesByImportance(n1, n2) {
-    return n2.importance - n1.importance;
-}
-/**
- * Compares notes by creation date. Last date first.
- * */
-function compareByCreationDate(n1, n2) {
-    return compareDatesDesc(n1.creationDate, n2.creationDate);
-}
-
-/**
- * Compares notes by completion date. Last date first. Null values last.
- * */
-function compareByCompletionDate(n1, n2) {
-    return compareDatesDesc(n1.completionDate, n2.completionDate);
+function getSortOrder(id) {
+    switch (id) {
+        case "sort-by-completion":
+            return function (n1, n2) {
+                return compareDatesDesc(n1.completionDate, n2.completionDate);
+            };
+        case "sort-by-creation":
+            return function (n1, n2) {
+                return compareDatesDesc(n1.creationDate, n2.creationDate);
+            };
+        case "sort-by-importance":
+            return function (n1, n2) {
+                return n2.importance - n1.importance;
+            };
+    }
 }
 
 /**
