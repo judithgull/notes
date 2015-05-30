@@ -10,8 +10,14 @@ $(function () {
     registerHandlebarsHelpers();
     var createNotesHtml = Handlebars.compile($("#notes-entry-template").html());
 
+    notes = notes.sort(compareNotesByImportance);
+
     document.getElementById("js-notes-list").innerHTML = createNotesHtml(notes);
 });
+
+function compareNotesByImportance(n1, n2) {
+    return n2.importance - n1.importance;
+}
 
 /**
  * Helper functions for templating:
