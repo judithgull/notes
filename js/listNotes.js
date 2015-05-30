@@ -11,7 +11,6 @@ $(function () {
     var createNotesHtml = Handlebars.compile($("#notes-entry-template").html());
 
     document.getElementById("js-notes-list").innerHTML = createNotesHtml(notes);
-
 });
 
 function formatDate(datetime) {
@@ -24,7 +23,7 @@ function formatDate(datetime) {
     if (!datetime) {
         return "Irgendwann";
     }
-    var m = moment(datetime, "YYYY-MM-DD");
+    var m = moment(datetime);
     if (isToday(m)) {
         return "Heute";
     }
@@ -49,6 +48,7 @@ function ensureStorageInitialized() {
 function getInitialNotes() {
     return [
         {
+            id: 0,
             title: "CAS FEE Selbststudium",
             description: "HTML für die Note App erstellen.\nCSS erstellen für die Note App.\nmore text",
             dueDate: moment().add(4, "day").toDate(),
@@ -56,6 +56,7 @@ function getInitialNotes() {
             importance: 2
         },
         {
+            id: 1,
             title: "Einkaufen",
             description: "Eier\nButter",
             dueDate: moment().toDate(),
@@ -63,6 +64,7 @@ function getInitialNotes() {
             importance: 1
         },
         {
+            id: 2,
             title: "Mami anrufen",
             description: "888 888 88 88",
             dueDate: null,
