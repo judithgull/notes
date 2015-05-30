@@ -12,6 +12,7 @@ $(function () {
 
     notes = notes.sort(compareNotesByImportance);
     notes = notes.sort(compareByCreationDate);
+    notes = notes.sort(compareByCompletionDate);
 
     document.getElementById("js-notes-list").innerHTML = createNotesHtml(notes);
 });
@@ -28,6 +29,22 @@ function compareNotesByImportance(n1, n2) {
 function compareByCreationDate(n1, n2) {
     return moment(n2.creationDate).valueOf() - moment(n1.creationDate).valueOf();
 }
+
+/**
+ * Compares notes by completion date. Last date first. Null values last.
+ * */
+function compareByCompletionDate(n1, n2) {
+    if (n1.completionDate === null && n2.completionDate === null) {
+        return 0;
+    }
+    else if (n1.completionDate === null) {
+        return 1;
+    } else if (n2.completionDate === null) {
+        return -1;
+    }
+    return moment(n2.completionDate).valueOf() - moment(n1.completionDate).valueOf();
+}
+
 /**
  * Helper functions for templating:
  * repeat(n,block): repeat a block n times
@@ -85,7 +102,7 @@ function getInitialNotes() {
             description: "HTML für die Note App erstellen.\nCSS erstellen für die Note App.\nmore text",
             creationDate: moment().subtract(4, "day").toDate(),
             dueDate: moment().add(4, "day").toDate(),
-            completionDate: new Date(),
+            completionDate: moment().subtract(5, "day").toDate(),
             importance: 2
         },
         {
@@ -94,7 +111,7 @@ function getInitialNotes() {
             description: "Eier\nButter",
             creationDate: moment().subtract(10, "day").toDate(),
             dueDate: moment().toDate(),
-            completionDate: null,
+            completionDate: new Date(),
             importance: 1
         },
         {
