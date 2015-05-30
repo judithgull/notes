@@ -1,22 +1,26 @@
 "use strict";
 $(function () {
-    console.log("hello!");
-    console.log(getInitialNotes());
+    ensureStorageInitialized();
 
     var notesStr = sessionStorage.getItem("notes");
-    if (!notesStr) {
-        sessionStorage.setItem("notes", JSON.stringify([]));
-        notesStr = sessionStorage.getItem("notes");
-    }
     var notes = JSON.parse(notesStr);
-
-    //add notes to page
-    //document.getElementById("body").appendChild("div")
 
     console.log("Current notes in session store:");
     console.log(notes);
-
 });
+
+/* Makes sure that the local storage contains a notes array and adds some initial data, if no data is available.
+* */
+function ensureStorageInitialized(){
+    var notesStr = sessionStorage.getItem("notes");
+    var initialNotes;
+    if (!notesStr) {
+        initialNotes = JSON.stringify(getInitialNotes());
+        console.log(initialNotes);
+        sessionStorage.setItem("notes", JSON.stringify(initialNotes));
+        console.log("Initialized Store:",initialNotes);
+    }
+}
 
 /*
  * Dummy data to show when page is initially loaded
