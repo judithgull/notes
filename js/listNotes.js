@@ -7,7 +7,8 @@ $(function () {
     console.log("Current notes in session store:", notes);
 
     var createNotesHtml = Handlebars.compile($("#notes-entry-template").html());
-    console.log(createNotesHtml(notes));
+
+    document.getElementById("js-notes-list").innerHTML = createNotesHtml(notes);
 });
 
 /* Makes sure that the local storage contains a notes array and adds some initial data, if no data is available.
@@ -29,14 +30,14 @@ function getInitialNotes() {
     return [
         {
             title: "CAS FEE Selbststudium",
-            description: "HTML für die Note App erstellen.\\nCSS erstellen für die Note App.\\nmore text",
+            description: "HTML für die Note App erstellen.\nCSS erstellen für die Note App.\nmore text",
             dueDate: new Date() + 2,
             completionDate: new Date(),
             importance: 2
         },
         {
             title: "Einkaufen",
-            description: "Eier\\nButter",
+            description: "Eier\nButter",
             dueDate: new Date(),
             completionDate: null,
             importance: 1
