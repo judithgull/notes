@@ -11,14 +11,23 @@ $(function () {
     var createNotesHtml = Handlebars.compile($("#notes-entry-template").html());
 
     notes = notes.sort(compareNotesByImportance);
+    notes = notes.sort(compareByCreationDate);
 
     document.getElementById("js-notes-list").innerHTML = createNotesHtml(notes);
 });
 
+/**
+ * Compares notes by importance. Most important first.
+ * */
 function compareNotesByImportance(n1, n2) {
     return n2.importance - n1.importance;
 }
-
+/**
+ * Compares notes by creation date. Last date first.
+ * */
+function compareByCreationDate(n1, n2) {
+    return moment(n2.creationDate).valueOf() - moment(n1.creationDate).valueOf();
+}
 /**
  * Helper functions for templating:
  * repeat(n,block): repeat a block n times
@@ -74,6 +83,7 @@ function getInitialNotes() {
             id: 0,
             title: "CAS FEE Selbststudium",
             description: "HTML für die Note App erstellen.\nCSS erstellen für die Note App.\nmore text",
+            creationDate: moment().subtract(4, "day").toDate(),
             dueDate: moment().add(4, "day").toDate(),
             completionDate: new Date(),
             importance: 2
@@ -82,6 +92,7 @@ function getInitialNotes() {
             id: 1,
             title: "Einkaufen",
             description: "Eier\nButter",
+            creationDate: moment().subtract(10, "day").toDate(),
             dueDate: moment().toDate(),
             completionDate: null,
             importance: 1
@@ -90,6 +101,7 @@ function getInitialNotes() {
             id: 2,
             title: "Mami anrufen",
             description: "888 888 88 88",
+            creationDate: moment().toDate(),
             dueDate: null,
             completionDate: null,
             importance: 0
