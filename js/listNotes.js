@@ -14,28 +14,32 @@ $(function () {
 
 });
 
-function formatDate(dateStr) {
-    if (!dateStr) {
+function formatDate(datetime) {
+    var isToday = function (mom) {
+        return mom.day() === moment().day()
+            && mom.month() === moment().month()
+            && mom.year() === moment().year();
+    };
+
+    if (!datetime) {
         return "Irgendwann";
     }
-    else {
-        var m = moment(dateStr, "YYYY-MM-DD");
-        if (m.day() === moment().day() && m.month() === moment().month() && m.year() === moment().year()) {
-            return "Heute";
-        }
-        return moment(dateStr, "YYYY-MM-DD").fromNow();
+    var m = moment(datetime, "YYYY-MM-DD");
+    if (isToday(m)) {
+        return "Heute";
     }
+    return m.fromNow();
 }
 
 /* Makes sure that the local storage contains a notes array and adds some initial data, if no data is available.
-* */
-function ensureStorageInitialized(){
+ * */
+function ensureStorageInitialized() {
     var notesStr = sessionStorage.getItem("notes");
     var initialNotes;
     if (!notesStr) {
         initialNotes = JSON.stringify(getInitialNotes());
         sessionStorage.setItem("notes", initialNotes);
-        console.log("Initialized Store:",initialNotes);
+        console.log("Initialized Store:", initialNotes);
     }
 }
 
@@ -47,14 +51,14 @@ function getInitialNotes() {
         {
             title: "CAS FEE Selbststudium",
             description: "HTML für die Note App erstellen.\nCSS erstellen für die Note App.\nmore text",
-            dueDate: moment().add(4, "day").format("YYYY-MM-DD"),
+            dueDate: moment().add(4, "day").toDate(),
             completionDate: new Date(),
             importance: 2
         },
         {
             title: "Einkaufen",
             description: "Eier\nButter",
-            dueDate: moment().format("YYYY-MM-DD"),
+            dueDate: moment().toDate(),
             completionDate: null,
             importance: 1
         },
