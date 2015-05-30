@@ -5,7 +5,20 @@ $(function () {
     var notesStr = sessionStorage.getItem("notes");
     var notes = JSON.parse(notesStr);
     console.log("Current notes in session store:", notes);
+    moment.locale("de-CH"); //TODO use browser locale
 
+    registerHandlebarsHelpers();
+    var createNotesHtml = Handlebars.compile($("#notes-entry-template").html());
+
+    document.getElementById("js-notes-list").innerHTML = createNotesHtml(notes);
+});
+
+/**
+ * Helper functions for templating:
+ * repeat(n,block): repeat a block n times
+ * formatDate(date): display a date nicely
+ */
+function registerHandlebarsHelpers() {
     Handlebars.registerHelper('repeat', function (n, block) {
         var res = "";
         for (var i = 0; i < n; ++i)
@@ -13,29 +26,26 @@ $(function () {
         return res;
     });
 
-    moment.locale("de-CH"); //TODO use browser locale
+    function formatDate(datetime) {
+        var isToday = function (mom) {
+            return mom.day() === moment().day()
+                && mom.month() === moment().month()
+                && mom.year() === moment().year();
+        };
+
+        if (!datetime) {
+            return "Irgendwann";
+        }
+        var m = moment(datetime);
+        if (isToday(m)) {
+            return "Heute";
+        }
+        return m.fromNow();
+    }
+
     Handlebars.registerHelper("formatDate", formatDate);
-    var createNotesHtml = Handlebars.compile($("#notes-entry-template").html());
-
-    document.getElementById("js-notes-list").innerHTML = createNotesHtml(notes);
-});
-
-function formatDate(datetime) {
-    var isToday = function (mom) {
-        return mom.day() === moment().day()
-            && mom.month() === moment().month()
-            && mom.year() === moment().year();
-    };
-
-    if (!datetime) {
-        return "Irgendwann";
-    }
-    var m = moment(datetime);
-    if (isToday(m)) {
-        return "Heute";
-    }
-    return m.fromNow();
 }
+
 
 /* Makes sure that the local storage contains a notes array and adds some initial data, if no data is available.
  * */
