@@ -4,9 +4,10 @@ $(function () {
 
     var notesStr = sessionStorage.getItem("notes");
     var notes = JSON.parse(notesStr);
+    console.log("Current notes in session store:", notes);
 
-    console.log("Current notes in session store:");
-    console.log(notes);
+    var createNotesHtml = Handlebars.compile($("#notes-entry-template").html());
+    console.log(createNotesHtml(notes));
 });
 
 /* Makes sure that the local storage contains a notes array and adds some initial data, if no data is available.
@@ -16,8 +17,7 @@ function ensureStorageInitialized(){
     var initialNotes;
     if (!notesStr) {
         initialNotes = JSON.stringify(getInitialNotes());
-        console.log(initialNotes);
-        sessionStorage.setItem("notes", JSON.stringify(initialNotes));
+        sessionStorage.setItem("notes", initialNotes);
         console.log("Initialized Store:",initialNotes);
     }
 }
