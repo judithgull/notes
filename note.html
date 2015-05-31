@@ -33,25 +33,17 @@
                 <div class="l-table-cell l-column-1">
                     <label for="note-importance">Importance</label>
                 </div>
-
-                <div class="l-table-cell l-column-2">
-                    <fieldset id="note-importance" class="importance-group l-space-bottom--medium">
-                    <input formaction="note.html" onclick="storeImportance(0)" id="n-imp-1" type="image"
-                           src="img/bolt.svg"
-                           width="10" height="20">
-                    <input formaction="note.html" onclick="storeImportance(1)" id="n-imp-2" type="image"
-                           src="img/bolt.svg"
-                           width="10" height="20">
-                    <input formaction="note.html" onclick="storeImportance(2)" id="n-imp-3" type="image"
-                           src="img/bolt.svg"
-                           width="10" height="20">
-                    <input formaction="note.html" onclick="storeImportance(3)" id="n-imp-4" type="image"
-                           src="img/bolt.svg"
-                           width="10" height="20">
-                    <input formaction="note.html" onclick="storeImportance(4)" id="n-imp-5" type="image"
-                           src="img/bolt.svg"
-                           width="10" height="20">
-                    </fieldset>
+                <div class="l-table-cell l-column-2 importanceRating">
+                    <input id="rating5" type="radio" name="rating" value="5" onclick="storeImportance(4)" >
+                    <label for="rating5">5</label>
+                    <input id="rating4" type="radio" name="rating" value="4" onclick="storeImportance(3)" >
+                    <label for="rating4">4</label>
+                    <input id="rating3" type="radio" name="rating" value="3" onclick="storeImportance(2)" >
+                    <label for="rating3">3</label>
+                    <input id="rating2" type="radio" name="rating" value="2" onclick="storeImportance(1)" >
+                    <label for="rating2">2</label>
+                    <input id="rating1" type="radio" name="rating" value="1" onclick="storeImportance(0)" >
+                    <label for="rating1">1</label>
                 </div>
             </div>
             <div class="l-table-row">
