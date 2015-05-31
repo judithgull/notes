@@ -130,6 +130,8 @@ ul {
 
 /* Buttons */
 .btn {
+    position: relative;
+    display: inline-block;
     padding: 1em;
 
     background-color: white;
@@ -223,5 +225,4 @@ ul {
 .importance-group {
     border: none;
 }
-
 
