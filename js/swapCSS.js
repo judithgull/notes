@@ -2,6 +2,10 @@
 "use strict";
 
 // changes stylesheet without pagereload.
-function swapStyleSheet(cssFilePath){
-  document.getElementById('js-stylesheet').setAttribute('href', cssFilePath);
+function swapStyleSheet(){
+  //get the value of options in dropdown.
+  var selectorStyle = document.getElementById("sel-display-style");
+  var optionValue = selectorStyle.options[selectorStyle.selectedIndex].value;
+
+  document.getElementById('js-stylesheet').setAttribute('href', "css/styles-" + optionValue + ".css");
 }
