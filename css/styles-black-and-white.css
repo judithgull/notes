@@ -1,0 +1,227 @@
+/*******************
+ * Base
+ *******************/
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+/* reset css */
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/*******************
+ * Layout
+ *
+ * l: layout
+ *******************/
+
+.l-site-width {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.l-table {
+    display: table;
+    width: 100%;
+}
+
+.l-table-row {
+    display: table-row;
+}
+
+.l-table-cell {
+    display: table-cell;
+}
+
+.l-column-1,
+.l-column-3 {
+    width: 20%;
+}
+
+.l-column-2 {
+    width: auto;
+}
+
+.l-align--right {
+    float: right;
+}
+
+.l-clearfix:after {
+    content: "";
+    clear: both;
+}
+
+.l-space-bottom--medium {
+    margin-bottom: 2rem;
+}
+
+/*******************
+ * Helpers
+ *******************/
+
+.is-hidden {
+    display: none;
+}
+
+/*******************
+ * Typography
+ *
+ * t: typography
+ *******************/
+
+.t-title,
+.t-date,
+.t-paragraph {
+    margin: 0 0 1rem;
+    font-size: 1em;
+}
+
+.t-paragraph:last-of-type {
+    margin-bottom: 0;
+}
+
+.t-link {
+    text-decoration: none;
+    color: #777;
+}
+
+/*******************
+ * Color
+ *
+ * c: color
+ *******************/
+
+/*******************
+ * Icons
+ *
+ * i: icon
+ *******************/
+.i-group {
+    display: inline-block;
+}
+
+.i-bolt {
+
+}
+
+/*******************
+ * Modules
+ *******************/
+
+/* Section Notes */
+.section-notes {
+    padding: 1em;
+}
+
+/* Buttons */
+.btn {
+    padding: 1em;
+
+    background-color: white;
+    border: 1px solid #777;
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+.btn--full {
+    width: 100%;
+}
+
+/* Dropdowns */
+.dropdown {
+
+}
+
+/* Tabs List */
+.tabs-list {
+    width: 80%;
+    font-size: 0.001px; /* This removes the space between inline-blocks.*/
+}
+
+.tab-item {
+    display: inline-block;
+    width: 33.333%;
+    font-size: 16px;
+}
+
+.tab-item--active{
+    background-color: #333;
+}
+
+.tab-item--active .t-link{
+    color:white;
+}
+
+.nav-filter .t-link {
+    display: block;
+    padding: 1em;
+
+    border: 1px solid gray;
+}
+
+.nav-filter .tab-item .t-link {
+    border-right: none;
+}
+
+.nav-filter .tab-item:last-child .t-link {
+    border-right: 1px solid gray;
+}
+
+/* Notes List */
+.note-title,
+.note-description {
+    display: inline-block;
+    width: 80%;
+}
+
+.hide-content {
+    overflow: hidden;
+    height: 2.3em;
+}
+
+.show-content {
+    height: auto;
+}
+
+.show-more {
+    display: inline-block;
+}
+
+/* Article Note Detail Page */
+
+.article {
+    padding: 1em;
+}
+
+.input,
+.textarea {
+    width: 100%;
+    border: 1px solid #999;
+}
+
+.textarea {
+    display: block;
+    height: 100px;
+}
+
+.importance-group {
+    border: none;
+}
+
+
