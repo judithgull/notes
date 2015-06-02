@@ -17,6 +17,9 @@ function send() {
 
 // TODO: If you click the cancel button it should not submit the form.
 
+function setImportanceValue() {
+    var selectedValue = event.toElement.value;
+    $(".js-importance-rating").attr("data-radio", selectedValue);
 }
 
 /*
@@ -29,6 +32,6 @@ function createNote() {
     note.description = document.getElementById("note-description").value;
     note.creationDate = new Date();
     note.dueDate = document.getElementById("note-due-date").value;
-    note.importance = 0; // TODO never null
+    note.importance = $(".js-importance-rating").attr("data-radio"); // TODO never null
     return note;
 }
