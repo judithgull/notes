@@ -126,7 +126,7 @@ function getInitialNotes() {
             creationDate: moment().subtract(4, "day").toDate(),
             dueDate: moment().add(4, "day").toDate(),
             completionDate: moment().subtract(5, "day").toDate(),
-            importance: 2
+            importance: 5
         },
         {
             id: 1,
