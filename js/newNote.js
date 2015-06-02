@@ -17,10 +17,6 @@ function send() {
 
 // TODO: If you click the cancel button it should not submit the form.
 
-function storeImportance(index) {
-    console.log("storeImportance" + index);
-    //TODO...
-    return false;
 }
 
 /*
