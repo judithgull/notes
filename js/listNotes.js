@@ -13,7 +13,7 @@ $(function () {
     $("#sort-tabs").on("click", function () {
         function activateOnly(id, activeMarker) {
             $("." + activeMarker).toggleClass(activeMarker);
-            $("#" + id).toggleClass(activeMarker);
+            $("#" + id).parent().toggleClass(activeMarker);
         }
 
         var selectedId = event.toElement.id;
