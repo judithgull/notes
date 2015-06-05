@@ -1,7 +1,8 @@
 var notesStorage = (function () {
+    var notes = JSON.parse(sessionStorage.getItem("notes"));
 
     function Note(title, description, dueDate, importance) {
-        this.id = 0; //TODO
+        this.id = notes.length;
         this.title = String(title);
         this.description = String(description);
         this.creationDate = new Date();
@@ -10,7 +11,6 @@ var notesStorage = (function () {
     }
 
     function privateStoreNote(note) {
-        var notes = JSON.parse(sessionStorage.getItem("notes"));
         notes.push(note);
         sessionStorage.setItem("notes", JSON.stringify(notes));
     }
