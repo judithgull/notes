@@ -19,8 +19,8 @@ $(function () {
         var selectedId = event.toElement.id;
         activateOnly(selectedId, "tab-item--active");
 
-        var sortOrder = getSortOrder(selectedId);
-        setNotesHtml(notes.sort(sortOrder));
+        var notes = getOrderedNotes(selectedId);
+        setNotesHtml(notes);
 
     });
     setNotesHtml(notes);
@@ -33,23 +33,14 @@ $(function () {
     }
 });
 
-/**
- * Returns a sort comparator function for a given id.
- * */
-function getSortOrder(id) {
+function getOrderedNotes(id) {
     switch (id) {
         case "sort-by-completion":
-            return function (n1, n2) {
-                return compareDatesDesc(n1.completionDate, n2.completionDate);
-            };
+            return notesStorage.getByCompletion();
         case "sort-by-creation":
-            return function (n1, n2) {
-                return compareDatesDesc(n1.creationDate, n2.creationDate);
-            };
+            return notesStorage.getByCreation();
         case "sort-by-importance":
-            return function (n1, n2) {
-                return n2.importance - n1.importance;
-            };
+            return notesStorage.getByImportance();
     }
 }
 

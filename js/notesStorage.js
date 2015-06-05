@@ -1,7 +1,5 @@
 var notesStorage = (function () {
 
-
-
     function getNotes() {
         var notesStr = sessionStorage.getItem("notes");
         if (!notesStr) {
@@ -38,7 +36,7 @@ var notesStorage = (function () {
             null
         );
     }
-    
+
     function Note(title, description, dueDate, importance, completionDate) {
         this.id = getNotes().length;
         this.title = String(title);
@@ -63,9 +61,74 @@ var notesStorage = (function () {
         return note;
     }
 
+    /*
+     *
+     function getSortOrder(id) {
+     switch (id) {
+     case "sort-by-completion":
+     return function (n1, n2) {
+     return compareDatesDesc(n1.completionDate, n2.completionDate);
+     };
+     case "sort-by-creation":
+     return function (n1, n2) {
+     return compareDatesDesc(n1.creationDate, n2.creationDate);
+     };
+     case "sort-by-importance":
+     return function (n1, n2) {
+     return n2.importance - n1.importance;
+     };
+     }
+     }
+     * */
+
+
+    function publicGetByImportance() {
+        return getSortedNotes(function (n1, n2) {
+            return n2.importance - n1.importance;
+        });
+    }
+
+    function publicGetByCreation() {
+        return getSortedNotes(privateGetDatesDescSortOrder(function (n1, n2) {
+            privateGetDatesDescSortOrder(n1.creationDate, n2.creationDate);
+        }));
+    }
+
+
+    function publicGetByCompletion() {
+        return getSortedNotes(privateGetDatesDescSortOrder(function (n1, n2) {
+            privateGetDatesDescSortOrder(n1.completionDate, n2.completionDate);
+        }));
+    }
+
+    function getSortedNotes(sortOrder) {
+        var notes = getNotes();
+        notes = notes.sort(sortOrder);
+        return notes;
+    }
+
+
+    /**
+     * Compares two dates: last date first, null values last.
+     * */
+    function privateGetDatesDescSortOrder(date1, date2) {
+        if (date1 === null && date2 === null) {
+            return 0;
+        }
+        else if (date1 === null) {
+            return 1;
+        } else if (date2 === null) {
+            return -1;
+        }
+        return moment(date2).valueOf() - moment(date1).valueOf();
+    }
+
     return {
         addNote: publicAddNote,
-        ensureInitialized: getNotes
+        ensureInitialized: getNotes,
+        getByCompletion: publicGetByCompletion,
+        getByCreation: publicGetByCreation,
+        getByImportance: publicGetByImportance
     };
 
 }());
