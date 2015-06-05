@@ -45,21 +45,6 @@ function getOrderedNotes(id) {
 }
 
 /**
- * Compares two dates: last date first, null values last.
- * */
-function compareDatesDesc(date1, date2) {
-    if (date1 === null && date2 === null) {
-        return 0;
-    }
-    else if (date1 === null) {
-        return 1;
-    } else if (date2 === null) {
-        return -1;
-    }
-    return moment(date2).valueOf() - moment(date1).valueOf();
-}
-
-/**
  * Helper functions for templating:
  * repeat(n,block): repeat a block n times
  * formatDate(date): display a date nicely
