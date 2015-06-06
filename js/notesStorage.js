@@ -55,6 +55,30 @@ var notesStorage = (function () {
         sessionStorage.setItem("notes", JSON.stringify(notes));
     }
 
+    function publicMarkFinished(id, finished) {
+        var note = privateGetNote(id);
+        if (note && finished) {
+            note.completionDate = new Date();
+        }
+        else if (note) {
+            note.copletionDate = null;
+        }
+        else {
+            console.error("Note not found");
+        }
+    }
+
+    function privateGetNote(id) {
+        var notes = getNotes();
+        for (var i = 0; i < notes.length; i++) {
+            var note = notes[0];
+            if (note.id === id) {
+                return note;
+            }
+        }
+        return null;
+    }
+
     function publicAddNote(title, description, dueDate, importance, completionDate) {
         var note = new Note(title, description, dueDate, importance, completionDate);
         privateStoreNote(note);
@@ -107,7 +131,7 @@ var notesStorage = (function () {
 
     return {
         addNote: publicAddNote,
-        ensureInitialized: getNotes,
+        markFinished: publicMarkFinished, //Mark note with a given id as finished/unfinished
         getByCompletion: publicGetByCompletion,
         getByCreation: publicGetByCreation,
         getByImportance: publicGetByImportance

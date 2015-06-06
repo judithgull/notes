@@ -41,9 +41,9 @@ $(function () {
         var notesCheckboxes = $("#js-notes-list").find("[type=\"checkbox\"]");
         notesCheckboxes.on("click", function () {
             var checkbox = $("#" + this.id);
-            var isChecked = checkbox.prop("checked");
-            var noteid = checkbox.parents("li").attr("data-id");
-            console.log("Checking note " + noteid + " " + isChecked);
+            var isChecked = checkbox.prop("checked") ? true : false;
+            var id = Number(checkbox.parents("li").attr("data-id"));
+            notesStorage.markFinished(id, isChecked);
         });
 
     }
