@@ -137,6 +137,11 @@ ul {
     width: 100%;
 }
 
+.btn--ib {
+    display: inline-block;
+}
+
+
 /* Dropdowns */
 .dropdown {
 
