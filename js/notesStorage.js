@@ -61,27 +61,6 @@ var notesStorage = (function () {
         return note;
     }
 
-    /*
-     *
-     function getSortOrder(id) {
-     switch (id) {
-     case "sort-by-completion":
-     return function (n1, n2) {
-     return compareDatesDesc(n1.completionDate, n2.completionDate);
-     };
-     case "sort-by-creation":
-     return function (n1, n2) {
-     return compareDatesDesc(n1.creationDate, n2.creationDate);
-     };
-     case "sort-by-importance":
-     return function (n1, n2) {
-     return n2.importance - n1.importance;
-     };
-     }
-     }
-     * */
-
-
     function publicGetByImportance() {
         return getSortedNotes(function (n1, n2) {
             return n2.importance - n1.importance;
