@@ -21,6 +21,13 @@ $(function () {
     }
 
     /**
+     * Register Click-Handler on Finished Button
+     */
+    $("#show-finished-btn").on("click", function () {
+        $("#show-finished-btn").toggleClass("btn--active");
+    });
+
+    /**
      * Load the notes in the correct order and set the html to the page
      * */
     function reloadNotes() {
