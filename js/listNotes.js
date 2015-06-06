@@ -19,16 +19,17 @@ $(function () {
         var selectedId = event.toElement.id;
         activateOnly(selectedId, "tab-item--active");
 
-        var notes = getOrderedNotes(selectedId);
-        setNotesHtml(notes);
+        reloadNotes();
 
     });
-    setNotesHtml(notes);
+    reloadNotes();
 
     /**
-     * Applies the notes data to the template and sets the generated HTML to the notes list.
+     * Load the notes in the correct order and set the html to the page
      * */
-    function setNotesHtml(notes) {
+    function reloadNotes() {
+        var sortOrderId = $(".tab-item--active").children().first().attr("id");
+        var notes = getOrderedNotes(sortOrderId);
         document.getElementById("js-notes-list").innerHTML = createNotesHtml(notes);
     }
 });
