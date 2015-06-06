@@ -11,7 +11,7 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment-with-locales.min.js"></script>
     <script id="notes-entry-template" type="text/x-handlebars-template">
         {{#each this}}
-        <li class="note-list-item l-space-bottom--medium">
+        <li class="note-list-item l-space-bottom--medium" data-id="{{id}}">
             <article class="l-table">
                 <div class="l-table-cell l-column-1">
                     <p class="note-due-date t-date">{{{formatDate dueDate}}}</p>
