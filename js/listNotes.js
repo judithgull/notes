@@ -32,7 +32,7 @@ $(function () {
      * */
     function reloadNotes() {
         var sortOrderId = $(".tab-item--active").children().first().attr("id");
-        var notes = getOrderedNotes(sortOrderId);
+        var notes = getOrderedNotes(sortOrderId, false);
         document.getElementById("js-notes-list").innerHTML = createNotesHtml(notes);
 
         /**
@@ -49,14 +49,14 @@ $(function () {
     }
 
 
-    function getOrderedNotes(id) {
+    function getOrderedNotes(id, includeFinished) {
         switch (id) {
             case "sort-by-completion":
-                return notesStorage.getByCompletion();
+                return notesStorage.getByCompletion(includeFinished);
             case "sort-by-creation":
-                return notesStorage.getByCreation();
+                return notesStorage.getByCreation(includeFinished);
             case "sort-by-importance":
-                return notesStorage.getByImportance();
+                return notesStorage.getByImportance(includeFinished);
         }
     }
 

@@ -87,28 +87,33 @@ var notesStorage = (function () {
         return note;
     }
 
-    function publicGetByImportance() {
+    function publicGetByImportance(includeFinished) {
         return getSortedNotes(function (n1, n2) {
             return n2.importance - n1.importance;
-        });
+        }, includeFinished);
     }
 
 
-    function publicGetByCreation() {
+    function publicGetByCreation(includeFinished) {
         return getSortedNotes(function (n1, n2) {
             return privateGetDatesDescSortOrder(n1.creationDate, n2.creationDate);
-        });
+        }, includeFinished);
     }
 
 
-    function publicGetByCompletion() {
+    function publicGetByCompletion(includeFinished) {
         return getSortedNotes(function (n1, n2) {
             return privateGetDatesDescSortOrder(n1.completionDate, n2.completionDate);
-        });
+        }, includeFinished);
     }
 
-    function getSortedNotes(sortOrder) {
+    function getSortedNotes(sortOrder, includeFinished) {
         var notes = getNotes();
+        if (!includeFinished) {
+            notes = notes.filter(function (n) {
+                return n.completionDate == null;
+            });
+        }
         notes = notes.sort(sortOrder);
         return notes;
     }
