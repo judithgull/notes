@@ -89,6 +89,7 @@ ul {
 .t-paragraph {
     margin: 0 0 1rem;
     font-size: 1rem;
+    color: black;
 }
 
 .t-paragraph:last-of-type {
