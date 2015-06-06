@@ -64,14 +64,14 @@ var notesStorage = (function () {
             note.copletionDate = null;
         }
         else {
-            console.error("Note not found");
+            console.error("Note not found for id " + id);
         }
     }
 
     function privateGetNote(id) {
         var notes = getNotes();
         for (var i = 0; i < notes.length; i++) {
-            var note = notes[0];
+            var note = notes[i];
             if (note.id === id) {
                 return note;
             }
