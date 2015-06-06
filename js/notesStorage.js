@@ -59,13 +59,25 @@ var notesStorage = (function () {
         var note = privateGetNote(id);
         if (note && finished) {
             note.completionDate = new Date();
+            privateUpdateNote(note);
         }
         else if (note) {
-            note.copletionDate = null;
+            note.completionDate = null;
+            privateUpdateNote(note);
         }
         else {
             console.error("Note not found for id " + id);
         }
+    }
+
+    function privateUpdateNote(note) {
+        var notes = getNotes();
+        for (var i = 0; i < notes.length; i++) {
+            if (notes[i].id === note.id) {
+                notes[i] = note;
+            }
+        }
+        sessionStorage.setItem("notes", JSON.stringify(notes));
     }
 
     function privateGetNote(id) {
