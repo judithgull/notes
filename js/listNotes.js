@@ -34,6 +34,18 @@ $(function () {
         var sortOrderId = $(".tab-item--active").children().first().attr("id");
         var notes = getOrderedNotes(sortOrderId);
         document.getElementById("js-notes-list").innerHTML = createNotesHtml(notes);
+
+        /**
+         * Register Handler for finished checkboxes
+         */
+        var notesCheckboxes = $("#js-notes-list").find("[type=\"checkbox\"]");
+        notesCheckboxes.on("click", function () {
+            var checkbox = $("#" + this.id);
+            var isChecked = checkbox.prop("checked");
+            var noteid = checkbox.parents("li").attr("data-id");
+            console.log("Checking note " + noteid + " " + isChecked);
+        });
+
     }
 
 
