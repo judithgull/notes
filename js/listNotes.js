@@ -25,6 +25,7 @@ $(function () {
      */
     $("#show-finished-btn").on("click", function () {
         $("#show-finished-btn").toggleClass("btn--active");
+        reloadNotes();
     });
 
     /**
@@ -32,7 +33,8 @@ $(function () {
      * */
     function reloadNotes() {
         var sortOrderId = $(".tab-item--active").children().first().attr("id");
-        var notes = getOrderedNotes(sortOrderId, false);
+        var isShowFinished = Boolean($(".btn--active").length);
+        var notes = getOrderedNotes(sortOrderId, isShowFinished);
         document.getElementById("js-notes-list").innerHTML = createNotesHtml(notes);
 
         /**
