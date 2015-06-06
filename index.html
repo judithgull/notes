@@ -15,7 +15,9 @@
             <article class="l-table">
                 <div class="l-table-cell l-column-1">
                     <p class="note-due-date t-date">{{{formatDate dueDate}}}</p>
-                    <input id="note-finished-{{id}}" type="checkbox" checked="checked">
+                    <input id="note-finished-{{id}}" type="checkbox"
+                           {{#if completionDate}} checked="checked" {{/if}}
+                    >
                     <label for="note-finished-{{id}}">Finished [Today]</label>
                 </div>
                 <div class="l-table-cell l-column-2">
