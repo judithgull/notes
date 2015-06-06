@@ -89,6 +89,7 @@ ul {
 .t-paragraph {
     margin: 0 0 1rem;
     font-size: 1rem;
+    color: black;
 }
 
 .t-paragraph:last-of-type {
@@ -111,13 +112,6 @@ ul {
  *
  * i: icon
  *******************/
-.i-group {
-    display: inline-block;
-}
-
-.i-bolt {
-
-}
 
 /*******************
  * Modules
@@ -227,7 +221,47 @@ ul {
     height: 100px;
 }
 
-.importance-group {
-    border: none;
+/* Importance */
+
+.importanceRating-wrap {
+    display: inline-block;
 }
 
+.importanceRating:not(old) {
+    display: inline-block;
+    width: 85px;
+    height: 24px;
+    overflow: hidden;
+    vertical-align: bottom;
+}
+
+.importanceRating:not(old) > input {
+    margin-right: -100%;
+    opacity: 0;
+}
+
+.importanceRating:not(old) > label {
+    display: block;
+    float: right;
+    margin-left: 3px;
+    position: relative;
+    background: url('../img/bolt-off.svg');
+    background-size: contain;
+}
+
+.importanceRating:not(old) > label:before {
+    content: '';
+    display: block;
+    width: 14px;
+    height: 24px;
+    background: url('../img/bolt-on.svg');
+    background-size: contain;
+    opacity: 0;
+    transition: opacity 0.2s linear;
+}
+
+.importanceRating:not(old) > label:hover:before,
+.importanceRating:not(old) > label:hover ~ label:before,
+.importanceRating:not(:hover) > :checked ~ label:before {
+    opacity: 1;
+}
