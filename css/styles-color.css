@@ -88,7 +88,8 @@ ul {
 .t-date,
 .t-paragraph {
     margin: 0 0 1rem;
-    font-size: 1em;
+    font-size: 1rem;
+    color: black;
 }
 
 .t-paragraph:last-of-type {
@@ -119,12 +120,12 @@ ul {
 
 /* Section Notes */
 .section-notes {
-    padding: 1em;
+    padding: 1rem;
 }
 
 /* Buttons */
 .btn {
-    padding: 1em;
+    padding: 1rem;
 
     background-color: white;
     border: 1px solid cadetblue;
@@ -136,6 +137,11 @@ ul {
 .btn--full {
     width: 100%;
 }
+
+.btn--ib {
+    display: inline-block;
+}
+
 
 /* Dropdowns */
 .dropdown {
@@ -164,7 +170,7 @@ ul {
 
 .nav-filter .t-link {
     display: block;
-    padding: 1em;
+    padding: 1rem;
 
     border: 1px solid gray;
 }
@@ -186,7 +192,7 @@ ul {
 
 .hide-content {
     overflow: hidden;
-    height: 2.3em;
+    height: 2.3rem;
 }
 
 .show-content {
@@ -200,7 +206,7 @@ ul {
 /* Article Note Detail Page */
 
 .article {
-    padding: 1em;
+    padding: 1rem;
 }
 
 .input,
