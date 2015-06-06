@@ -1,4 +1,6 @@
 var notesStorage = (function () {
+    //only use de-CH formatted dates
+    moment.locale("de-CH");
 
     function getNotes() {
         var notesStr = sessionStorage.getItem("notes");

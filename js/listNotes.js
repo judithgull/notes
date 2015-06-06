@@ -1,7 +1,5 @@
 "use strict";
 $(function () {
-    moment.locale("de-CH"); //TODO use browser locale
-
     registerHandlebarsHelpers();
     var createNotesHtml = Handlebars.compile($("#notes-entry-template").html());
 
