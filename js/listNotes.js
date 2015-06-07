@@ -28,6 +28,7 @@ $(function () {
         reloadNotes();
     });
 
+
     /**
      * Load the notes in the correct order and set the html to the page
      * */
@@ -47,6 +48,16 @@ $(function () {
             var id = Number(checkbox.parents("li").attr("data-id"));
             notesStorage.markFinished(id, isChecked);
             reloadNotes();
+        });
+
+        /**
+         * Register Handler on Edit Button
+         * */
+        var editButtons = $("#js-notes-list").find("button");
+        editButtons.on("click", function(){
+            var id = Number($("#" + this.id).parents("li").attr("data-id"));
+            location.href="note.html";
+            console.log("Edit Note " + id);
         });
 
     }
