@@ -1,4 +1,6 @@
 var notesStorage = (function () {
+    //only use de-CH formatted dates
+    moment.locale("de-CH");
 
     function getNotes() {
         var notesStr = sessionStorage.getItem("notes");
@@ -53,6 +55,42 @@ var notesStorage = (function () {
         sessionStorage.setItem("notes", JSON.stringify(notes));
     }
 
+    function publicMarkFinished(id, finished) {
+        var note = privateGetNote(id);
+        if (note && finished) {
+            note.completionDate = new Date();
+            privateUpdateNote(note);
+        }
+        else if (note) {
+            note.completionDate = null;
+            privateUpdateNote(note);
+        }
+        else {
+            console.error("Note not found for id " + id);
+        }
+    }
+
+    function privateUpdateNote(note) {
+        var notes = getNotes();
+        for (var i = 0; i < notes.length; i++) {
+            if (notes[i].id === note.id) {
+                notes[i] = note;
+            }
+        }
+        sessionStorage.setItem("notes", JSON.stringify(notes));
+    }
+
+    function privateGetNote(id) {
+        var notes = getNotes();
+        for (var i = 0; i < notes.length; i++) {
+            var note = notes[i];
+            if (note.id === id) {
+                return note;
+            }
+        }
+        return null;
+    }
+
     function publicAddNote(title, description, dueDate, importance, completionDate) {
         var note = new Note(title, description, dueDate, importance, completionDate);
         privateStoreNote(note);
@@ -61,48 +99,33 @@ var notesStorage = (function () {
         return note;
     }
 
-    /*
-     *
-     function getSortOrder(id) {
-     switch (id) {
-     case "sort-by-completion":
-     return function (n1, n2) {
-     return compareDatesDesc(n1.completionDate, n2.completionDate);
-     };
-     case "sort-by-creation":
-     return function (n1, n2) {
-     return compareDatesDesc(n1.creationDate, n2.creationDate);
-     };
-     case "sort-by-importance":
-     return function (n1, n2) {
-     return n2.importance - n1.importance;
-     };
-     }
-     }
-     * */
-
-
-    function publicGetByImportance() {
+    function publicGetByImportance(includeFinished) {
         return getSortedNotes(function (n1, n2) {
             return n2.importance - n1.importance;
-        });
-    }
-
-    function publicGetByCreation() {
-        return getSortedNotes(privateGetDatesDescSortOrder(function (n1, n2) {
-            privateGetDatesDescSortOrder(n1.creationDate, n2.creationDate);
-        }));
+        }, includeFinished);
     }
 
 
-    function publicGetByCompletion() {
-        return getSortedNotes(privateGetDatesDescSortOrder(function (n1, n2) {
-            privateGetDatesDescSortOrder(n1.completionDate, n2.completionDate);
-        }));
+    function publicGetByCreation(includeFinished) {
+        return getSortedNotes(function (n1, n2) {
+            return privateGetDatesDescSortOrder(n1.creationDate, n2.creationDate);
+        }, includeFinished);
     }
 
-    function getSortedNotes(sortOrder) {
+
+    function publicGetByCompletion(includeFinished) {
+        return getSortedNotes(function (n1, n2) {
+            return privateGetDatesDescSortOrder(n1.completionDate, n2.completionDate);
+        }, includeFinished);
+    }
+
+    function getSortedNotes(sortOrder, includeFinished) {
         var notes = getNotes();
+        if (!includeFinished) {
+            notes = notes.filter(function (n) {
+                return n.completionDate == null;
+            });
+        }
         notes = notes.sort(sortOrder);
         return notes;
     }
@@ -125,7 +148,7 @@ var notesStorage = (function () {
 
     return {
         addNote: publicAddNote,
-        ensureInitialized: getNotes,
+        markFinished: publicMarkFinished, //Mark note with a given id as finished/unfinished
         getByCompletion: publicGetByCompletion,
         getByCreation: publicGetByCreation,
         getByImportance: publicGetByImportance

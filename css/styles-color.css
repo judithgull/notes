@@ -143,6 +143,10 @@ ul {
     display: inline-block;
 }
 
+.btn--active {
+    background-color: steelblue;
+    color: white;
+}
 
 /* Dropdowns */
 .dropdown {
