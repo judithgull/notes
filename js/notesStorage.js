@@ -81,6 +81,7 @@ var notesStorage = (function () {
     }
 
     function publicGetNote(id) {
+        var id = Number(id);
         var notes = getNotes();
         for (var i = 0; i < notes.length; i++) {
             var note = notes[i];
