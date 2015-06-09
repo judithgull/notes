@@ -14,3 +14,14 @@ function setImportanceValue() {
     var selectedValue = event.toElement.value;
     $(".js-importance-rating").attr("data-radio", selectedValue);
 }
+
+$(function(){
+    var idQueryRegex = /[?&]id=([^&#]+)/;
+    var idQueryResult = location.href.match(idQueryRegex);
+
+    if (idQueryResult !== null) {
+        var id = idQueryResult[1];
+        console.log(id);
+    }
+
+});
