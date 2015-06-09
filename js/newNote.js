@@ -22,6 +22,8 @@ $(function(){
     if (idQueryResult !== null) {
         var id = idQueryResult[1];
         console.log(id);
+        var note = notesStorage.getNote(id);
+        console.log(note);
     }
 
 });
