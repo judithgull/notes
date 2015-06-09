@@ -56,7 +56,7 @@ var notesStorage = (function () {
     }
 
     function publicMarkFinished(id, finished) {
-        var note = privateGetNote(id);
+        var note = publicGetNote(id);
         if (note && finished) {
             note.completionDate = new Date();
             privateUpdateNote(note);
@@ -80,7 +80,7 @@ var notesStorage = (function () {
         sessionStorage.setItem("notes", JSON.stringify(notes));
     }
 
-    function privateGetNote(id) {
+    function publicGetNote(id) {
         var notes = getNotes();
         for (var i = 0; i < notes.length; i++) {
             var note = notes[i];
@@ -151,7 +151,8 @@ var notesStorage = (function () {
         markFinished: publicMarkFinished, //Mark note with a given id as finished/unfinished
         getByCompletion: publicGetByCompletion,
         getByCreation: publicGetByCreation,
-        getByImportance: publicGetByImportance
+        getByImportance: publicGetByImportance,
+        getNote: publicGetNote
     };
 
 }());
