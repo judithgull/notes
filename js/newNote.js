@@ -3,7 +3,14 @@ function send() {
     var description = document.getElementById("note-description").value;
     var dueDate = document.getElementById("note-due-date").value;
     var importance = $(".js-importance-rating").attr("data-radio");
-    var note = notesStorage.addNote(title, description, dueDate, importance);
+
+    var id = getNoteId();
+
+    if (id === null) {
+        var note = notesStorage.addNote(title, description, dueDate, importance);
+    } else {
+        var note = notesStorage.updateNote(id, title, description, dueDate, importance);
+    }
 
     //jump to list view
     window.location.replace("/index.html");

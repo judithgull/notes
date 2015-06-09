@@ -39,8 +39,8 @@ var notesStorage = (function () {
         );
     }
 
-    function Note(title, description, dueDate, importance, completionDate) {
-        this.id = getNotes().length;
+    function Note(id, title, description, dueDate, importance, completionDate) {
+        this.id = Number(id);
         this.title = String(title);
         this.description = String(description);
         this.creationDate = new Date();
@@ -93,11 +93,17 @@ var notesStorage = (function () {
     }
 
     function publicAddNote(title, description, dueDate, importance, completionDate) {
-        var note = new Note(title, description, dueDate, importance, completionDate);
+        var id = getNotes().length;
+        var note = new Note(id, title, description, dueDate, importance, completionDate);
         privateStoreNote(note);
         console.log("New note added");
         console.log(note);
         return note;
+    }
+
+    function publicUpdateNote(id, title, description, dueDate, importance) {
+        var note = new Note(id, title, description, dueDate, importance);
+        return privateUpdateNote(note);
     }
 
     function publicGetByImportance(includeFinished) {
@@ -153,7 +159,8 @@ var notesStorage = (function () {
         getByCompletion: publicGetByCompletion,
         getByCreation: publicGetByCreation,
         getByImportance: publicGetByImportance,
-        getNote: publicGetNote
+        getNote: publicGetNote,
+        updateNote: publicUpdateNote
     };
 
 }());
