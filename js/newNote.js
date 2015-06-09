@@ -16,11 +16,9 @@ function setImportanceValue() {
 }
 
 $(function(){
-    var idQueryRegex = /[?&]id=([^&#]+)/;
-    var idQueryResult = location.href.match(idQueryRegex);
+    var id = getNoteId();
 
-    if (idQueryResult !== null) {
-        var id = idQueryResult[1];
+    if (id !== null) {
         var note = notesStorage.getNote(id);
         var dueDateStr = moment(note.dueDate).format('YYYY-MM-DD');
         $("#note-title").val(note.title);
@@ -31,3 +29,12 @@ $(function(){
     }
 
 });
+
+function getNoteId() {
+    var idQueryRegex = /[?&]id=([^&#]+)/;
+    var idQueryResult = location.href.match(idQueryRegex);
+    if (idQueryResult !== null) {
+        return idQueryResult[1];
+    }
+    return null;
+};
