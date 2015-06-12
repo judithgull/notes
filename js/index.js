@@ -12,3 +12,6 @@ var serve = serveStatic("."),
     });
 
 server.listen(3000);
+
+var storage = require('./noteStorage.js');
+console.log(storage.getByCompletion(true));

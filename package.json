@@ -11,6 +11,8 @@
   "homepage": "https://github.com/judithgull/notes",
   "dependencies": {
     "finalhandler": "^0.3.6",
+    "localStorage": "^1.0.3",
+    "moment": "^2.10.3",
     "serve-static": "^1.9.2"
   }
 }
