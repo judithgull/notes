@@ -35,6 +35,7 @@ $(function(){
         $(".js-importance-rating").find("[value=" + note.importance +"]").prop("checked", true);
     }
 
+    document.getElementById("note").addEventListener("submit", send);
 });
 
 function getNoteId() {
