@@ -1,6 +1,12 @@
 
 "use strict";
 
+$(function () {
+  document.getElementById("sel-display-style").addEventListener("change", swapStyleSheet);
+});
+
+
+
 // changes stylesheet without pagereload.
 function swapStyleSheet(){
   //get the value of options in dropdown.
