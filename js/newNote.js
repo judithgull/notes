@@ -8,12 +8,19 @@ function send() {
 
     if (id === null) {
         var note = notesStorage.addNote(title, description, dueDate, importance);
+        $.post("/note", JSON.stringify({
+                title: title,
+                description: description,
+                dueDate: dueDate,
+                importance: importance
+            }),
+            function () {
+                //jump to list view
+                window.location.replace("/index.html");
+            });
     } else {
         var note = notesStorage.updateNote(id, title, description, dueDate, importance);
     }
-
-    //jump to list view
-    window.location.replace("/index.html");
     return true;
 }
 
