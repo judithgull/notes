@@ -49,8 +49,10 @@ $(function () {
                 var checkbox = $("#" + this.id);
                 var isChecked = checkbox.prop("checked") ? true : false;
                 var id = Number(checkbox.parents("li").attr("data-id"));
-                notesStorage.markFinished(id, isChecked);
-                reloadNotes();
+                $.post("/markNoteFinished", JSON.stringify({id: id, checked: isChecked}),
+                    function () {
+                        reloadNotes();
+                    });
             });
 
             /**
