@@ -35,28 +35,32 @@ $(function () {
     function reloadNotes() {
         var sortOrderId = $(".tab-item--active").children().first().attr("id");
         var isShowFinished = Boolean($(".btn--active").length);
-        var notes = getOrderedNotes(sortOrderId, isShowFinished);
-        document.getElementById("js-notes-list").innerHTML = createNotesHtml(notes);
 
-        /**
-         * Register Handler for finished checkboxes
-         */
-        var notesCheckboxes = $("#js-notes-list").find("[type=\"checkbox\"]");
-        notesCheckboxes.on("click", function () {
-            var checkbox = $("#" + this.id);
-            var isChecked = checkbox.prop("checked") ? true : false;
-            var id = Number(checkbox.parents("li").attr("data-id"));
-            notesStorage.markFinished(id, isChecked);
-            reloadNotes();
-        });
+        var getNotesUrl = "/notes?sorting=" + sortOrderId + "&includeFinished=" + isShowFinished;
 
-        /**
-         * Register Handler on Edit Button
-         * */
-        var editButtons = $("#js-notes-list").find("button");
-        editButtons.on("click", function(){
-            var id = Number($("#" + this.id).parents("li").attr("data-id"));
-            location.href="note.html?id=" + id;
+        $.getJSON(getNotesUrl, function (notes) {
+            document.getElementById("js-notes-list").innerHTML = createNotesHtml(notes);
+
+            /**
+             * Register Handler for finished checkboxes
+             */
+            var notesCheckboxes = $("#js-notes-list").find("[type=\"checkbox\"]");
+            notesCheckboxes.on("click", function () {
+                var checkbox = $("#" + this.id);
+                var isChecked = checkbox.prop("checked") ? true : false;
+                var id = Number(checkbox.parents("li").attr("data-id"));
+                notesStorage.markFinished(id, isChecked);
+                reloadNotes();
+            });
+
+            /**
+             * Register Handler on Edit Button
+             * */
+            var editButtons = $("#js-notes-list").find("button");
+            editButtons.on("click", function () {
+                var id = Number($("#" + this.id).parents("li").attr("data-id"));
+                location.href = "note.html?id=" + id;
+            });
         });
 
     }
@@ -65,6 +69,7 @@ $(function () {
     function getOrderedNotes(id, includeFinished) {
         switch (id) {
             case "sort-by-completion":
+                ///notes?sorting=byCompletion&includeFinished=true
                 return notesStorage.getByCompletion(includeFinished);
             case "sort-by-creation":
                 return notesStorage.getByCreation(includeFinished);
