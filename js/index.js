@@ -4,7 +4,8 @@ var storage = require('./noteStorage.js'),
     serveStatic = require("serve-static"),
     url = require("url"),
     http = require("http"),
-    finalhandler = require("finalhandler");
+    finalhandler = require("finalhandler"),
+    moment = require("moment");
 
 
 var serve = serveStatic("."),
@@ -46,25 +47,53 @@ var serve = serveStatic("."),
                     }
                 });
             }
-        } else if (req.url.indexOf("/notes") == 0) {
-            res.writeHead(200, {'Content-Type': 'application/json'});
+        } else if (req.method === "GET") {
+            console.log("get" + req.url);
+            if (req.url.indexOf("/notes") == 0) {
+                res.writeHead(200, {'Content-Type': 'application/json'});
 
-            var queryObject = url.parse(req.url,true).query;
-            var includeFinished = queryObject["includeFinished"] === "true";
-            var sorting = queryObject["sorting"];
-            var notes;
-            if (sorting === "sort-by-completion") {
-                notes = storage.getByCompletion(includeFinished);
-            } else if (sorting === "sort-by-creation") {
-                notes = storage.getByCreation(includeFinished);
-            } else if (sorting === "sort-by-importance") {
-                notes = storage.getByImportance(includeFinished);
-            } else {
 
+                var queryObject = url.parse(req.url, true).query;
+                var id = queryObject["id"];
+                console.log("id=" + id);
+                if (id) {
+                    console.log("get id " + id);
+                    var note = storage.getNote(id);
+                    //convert date to string
+                    moment.locale("de-CH");
+                    if (note.dueDate) {
+                        console.log(note.dueDate);
+                        note.dueDate = moment(note.dueDate).format('YYYY-MM-DD');
+                    }
+                    if (note.creationDate) {
+                        note.creationDate = moment(note.creationDate).format('YYYY-MM-DD');
+                    }
+                    if (note.completionDate) {
+                        note.completionDate = moment(note.completionDate).format('YYYY-MM-DD');
+                    }
+                    console.log(note.dueDate);
+                    res.end(JSON.stringify(note));
+
+                } else {
+
+                    var includeFinished = queryObject["includeFinished"] === "true";
+                    var sorting = queryObject["sorting"];
+                    var notes;
+                    if (sorting === "sort-by-completion") {
+                        notes = storage.getByCompletion(includeFinished);
+                    } else if (sorting === "sort-by-creation") {
+                        notes = storage.getByCreation(includeFinished);
+                    } else if (sorting === "sort-by-importance") {
+                        notes = storage.getByImportance(includeFinished);
+                    } else {
+
+                    }
+                    res.end(JSON.stringify(notes));
+                }
             }
-            res.end(JSON.stringify(notes));
-        }else{
-            serve(req, res, done);
+            else {
+                serve(req, res, done);
+            }
         }
     });
 

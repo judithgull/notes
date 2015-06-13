@@ -33,13 +33,13 @@ $(function(){
     var id = getNoteId();
 
     if (id !== null) {
-        var note = notesStorage.getNote(id);
-        var dueDateStr = moment(note.dueDate).format('YYYY-MM-DD');
-        $("#note-title").val(note.title);
-        $("#note-description").val(note.description);
-        $("#note-due-date").val(dueDateStr);
-        $(".js-importance-rating").attr("data-radio", note.importance);
-        $(".js-importance-rating").find("[value=" + note.importance +"]").prop("checked", true);
+        $.getJSON("/notes?id=" + id, function (note) {
+            $("#note-title").val(note.title);
+            $("#note-description").val(note.description);
+            $("#note-due-date").val(note.dueDate);
+            $(".js-importance-rating").attr("data-radio", note.importance);
+            $(".js-importance-rating").find("[value=" + note.importance + "]").prop("checked", true);
+        });
     }
 
     document.getElementById("note").addEventListener("submit", send);
