@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="l-table-cell l-column-2">
-                    <input id="note-title" type="text" value="..." class="input l-space-bottom--medium">
+                    <input id="note-title" type="text" class="input l-space-bottom--medium">
                 </div>
             </div>
             <div class="l-table-row">
@@ -29,14 +29,15 @@
                 </div>
 
                 <div class="l-table-cell l-column-2">
-                    <textarea id="note-description" class="textarea l-space-bottom--medium">HTML pr die note App erstellen,CSS erstellen...</textarea>
+                    <textarea id="note-description" class="textarea l-space-bottom--medium"></textarea>
                 </div>
             </div>
             <div class="l-table-row">
                 <div class="l-table-cell l-column-1">
                     <label for="note-importance">Importance</label>
                 </div>
-                <div class="l-table-cell l-column-2 importanceRating js-importance-rating" data-radio="0" onclick="setImportanceValue()">
+                <div id="note-importance" class="l-table-cell l-column-2 importanceRating js-importance-rating"
+                     data-radio="0" onclick="setImportanceValue()">
                     <input id="rating5" type="radio" name="rating" value="5">
                     <label for="rating5">5</label>
                     <input id="rating4" type="radio" name="rating" value="4">
