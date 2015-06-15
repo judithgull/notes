@@ -17,8 +17,7 @@ $(function () {
             $("#note-title").val(note.title);
             $("#note-description").val(note.description);
             $("#note-due-date").val(note.dueDate);
-            $(".js-importance-rating").attr("data-radio", note.importance);
-            $(".js-importance-rating").find("[value=" + note.importance + "]").prop("checked", true);
+            $("#importance-rating").find("[value=" + note.importance + "]").prop("checked", true);
         });
     }
 
@@ -31,7 +30,7 @@ $(function () {
             title: $("#note-title").val(),
             description: $("#note-description").val(),
             dueDate: $("#note-due-date").val(),
-            importance: $(".js-importance-rating").attr("data-radio")
+            importance: getRating()
         };
 
         var requestSettings = {
@@ -54,9 +53,11 @@ $(function () {
         }
         return null;
     }
+
+    function getRating() {
+        var checkedRadio = $("#importance-rating").find(":checked");
+        if (checkedRadio) return checkedRadio.attr("value");
+        else return 0;
+    }
 });
 
-function setImportanceValue() {
-    var selectedValue = event.toElement.value;
-    $(".js-importance-rating").attr("data-radio", selectedValue);
-}
