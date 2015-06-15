@@ -47,6 +47,24 @@ var serve = serveStatic("."),
                     }
                 });
             }
+        } else if (req.method === "PUT") {
+            console.log("PUT " + req.url);
+            var body = '';
+            console.log(body);
+            req.on('data', function (chunk) {
+                body += chunk;
+            });
+            if (req.url === "/note") {
+                req.on('end', function () {
+                    var data = JSON.parse(body);
+                    storage.updateNote(
+                        data.id,
+                        data.title,
+                        data.description,
+                        data.dueDate,
+                        data.importance);
+                });
+            }
         } else if (req.method === "GET") {
             console.log("get" + req.url);
             if (req.url.indexOf("/notes") == 0) {

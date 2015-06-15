@@ -7,7 +7,6 @@ function send() {
     var id = getNoteId();
 
     if (id === null) {
-        var note = notesStorage.addNote(title, description, dueDate, importance);
         $.post("/note", JSON.stringify({
                 title: title,
                 description: description,
@@ -19,7 +18,22 @@ function send() {
                 window.location.replace("/index.html");
             });
     } else {
-        var note = notesStorage.updateNote(id, title, description, dueDate, importance);
+        $.ajax({
+            url: "/note",
+            type: "PUT",
+            data: JSON.stringify(
+                {
+                    id: id,
+                    title: title,
+                    description: description,
+                    dueDate: dueDate,
+                    importance: importance
+                })
+        }).done(function () {
+            //jump to list view
+            window.location.replace("/index.html");
+        });
+
     }
     return true;
 }
@@ -29,7 +43,7 @@ function setImportanceValue() {
     $(".js-importance-rating").attr("data-radio", selectedValue);
 }
 
-$(function(){
+$(function () {
     var id = getNoteId();
 
     if (id !== null) {
