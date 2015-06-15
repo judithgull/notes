@@ -67,19 +67,6 @@ $(function () {
 
     }
 
-
-    function getOrderedNotes(id, includeFinished) {
-        switch (id) {
-            case "sort-by-completion":
-                ///notes?sorting=byCompletion&includeFinished=true
-                return notesStorage.getByCompletion(includeFinished);
-            case "sort-by-creation":
-                return notesStorage.getByCreation(includeFinished);
-            case "sort-by-importance":
-                return notesStorage.getByImportance(includeFinished);
-        }
-    }
-
     /**
      * Helper functions for templating:
      * repeat(n,block): repeat a block n times
