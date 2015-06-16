@@ -4,10 +4,14 @@
 $(function () {
     var id = getNoteId();
 
+    var completionDate = null;
+
+
     if (id !== null) {
         load(id);
     }
     $("#note").on("submit", submit);
+
 
     /**
      * query note with given id and update html
@@ -18,6 +22,7 @@ $(function () {
             $("#note-description").val(note.description);
             $("#note-due-date").val(note.dueDate);
             $("#importance-rating").find("[value=" + note.importance + "]").prop("checked", true);
+            completionDate = note.completionDate;
         });
     }
 
@@ -30,7 +35,8 @@ $(function () {
             title: $("#note-title").val(),
             description: $("#note-description").val(),
             dueDate: $("#note-due-date").val(),
-            importance: getRating()
+            importance: getRating(),
+            completionDate: completionDate
         };
 
         var requestSettings = {

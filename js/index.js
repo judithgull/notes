@@ -62,7 +62,8 @@ var serve = serveStatic("."),
                         data.title,
                         data.description,
                         data.dueDate,
-                        data.importance);
+                        data.importance,
+                        data.completionDate);
                 });
             }
         } else if (req.method === "GET") {
@@ -80,7 +81,7 @@ var serve = serveStatic("."),
                     //convert date to string
                     moment.locale("de-CH");
                     if (note.dueDate) {
-                        console.log(note.dueDate);
+                        console.log("due date: " + note.dueDate);
                         note.dueDate = moment(note.dueDate).format('YYYY-MM-DD');
                     }
                     if (note.creationDate) {

@@ -103,8 +103,8 @@ function publicAddNote(title, description, dueDate, importance, completionDate) 
     return note;
 }
 
-function publicUpdateNote(id, title, description, dueDate, importance) {
-    var note = new Note(id, title, description, dueDate, importance);
+function publicUpdateNote(id, title, description, dueDate, importance, completionDate) {
+    var note = new Note(id, title, description, dueDate, importance, completionDate);
     return privateUpdateNote(note);
 }
 
