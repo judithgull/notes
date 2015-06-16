@@ -1,5 +1,6 @@
 "use strict";
 $(function () {
+    moment.locale("en-US");
     registerHandlebarsHelpers();
     var createNotesHtml = Handlebars.compile($("#notes-entry-template").html());
 
@@ -88,11 +89,12 @@ $(function () {
             };
 
             if (!datetime) {
-                return "Irgendwann";
+                return "someday";
             }
+
             var m = moment(datetime);
             if (isToday(m)) {
-                return "Heute";
+                return "today";
             }
             return m.fromNow();
         }
