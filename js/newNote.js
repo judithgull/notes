@@ -20,7 +20,7 @@ $(function () {
         $.getJSON("/notes?id=" + id, function (note) {
             $("#note-title").val(note.title);
             $("#note-description").val(note.description);
-            $("#note-due-date").val(note.dueDate);
+            $("#note-due-date").val(dateToString(note.dueDate));
             $("#importance-rating").find("[value=" + note.importance + "]").prop("checked", true);
             completionDate = note.completionDate;
         });
@@ -49,6 +49,13 @@ $(function () {
             window.location.replace("/index.html");
         });
         return true;
+    }
+
+    function dateToString(date) {
+        if (date) {
+            return moment(date).format('YYYY-MM-DD');
+        }
+        return null;
     }
 
     function getNoteId() {

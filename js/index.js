@@ -74,23 +74,8 @@ var serve = serveStatic("."),
 
                 var queryObject = url.parse(req.url, true).query;
                 var id = queryObject["id"];
-                console.log("id=" + id);
                 if (id) {
-                    console.log("get id " + id);
                     var note = storage.getNote(id);
-                    //convert date to string
-                    moment.locale("de-CH");
-                    if (note.dueDate) {
-                        console.log("due date: " + note.dueDate);
-                        note.dueDate = moment(note.dueDate).format('YYYY-MM-DD');
-                    }
-                    if (note.creationDate) {
-                        note.creationDate = moment(note.creationDate).format('YYYY-MM-DD');
-                    }
-                    if (note.completionDate) {
-                        note.completionDate = moment(note.completionDate).format('YYYY-MM-DD');
-                    }
-                    console.log(note.dueDate);
                     res.end(JSON.stringify(note));
 
                 } else {
