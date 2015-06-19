@@ -15,6 +15,8 @@ var router = express.Router();
 
 
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.urlencoded());
+app.use(bodyParser.json());
 app.use("/notes", require('./routes/noteRoutes.js'));
 
 http.createServer(app).listen(3000);

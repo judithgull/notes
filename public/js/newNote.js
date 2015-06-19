@@ -40,8 +40,8 @@ $(function () {
         };
 
         var requestSettings = {
-            url: "/note",
-            data: JSON.stringify(data),
+            url: "/notes",
+            data: data,
             type: (data.id === null) ? "POST" : "PUT"
         };
         $.ajax(requestSettings).done(function () {

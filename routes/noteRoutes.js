@@ -5,7 +5,7 @@ var notes = require('../controller/noteController.js');
 
 
 router.get("/", notes.getNotes);
-//router.post("/", notes.createNote);
+router.post("/", notes.addNote);
 router.get("/:id/", notes.getNote);
 //router.put("/:id/", notes.updateNote);
 

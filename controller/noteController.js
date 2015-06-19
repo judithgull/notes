@@ -36,3 +36,19 @@ module.exports.getNote = function (req, res) {
     });
 
 };
+
+module.exports.addNote = function (req, res) {
+    res.format({
+        'application/json': function () {
+
+            var body = req.body;
+
+            store.addNote(
+                body.title,
+                body.description,
+                body.dueDate,
+                body.importance);
+        }
+    });
+
+};
