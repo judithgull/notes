@@ -190,18 +190,6 @@ ul {
     width: 80%;
 }
 
-.hide-content {
-    overflow: hidden;
-    height: 2.3rem;
-}
-
-.show-content {
-    height: auto;
-}
-
-.show-more {
-    display: inline-block;
-}
 
 /* Article Note Detail Page */
 

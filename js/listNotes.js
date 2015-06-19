@@ -65,23 +65,8 @@ $(function () {
                 location.href = "note.html?id=" + id;
             });
 
-            $(".show-more a").on("click", function() {
-                var $this = $(this);
-                var $content = $this.parent().prev("div.js-content");
-
-                var linkText = $this.text().toUpperCase();
-                if(linkText === "SHOW MORE"){
-                    linkText = "Show less";
-                } else {
-                    linkText = "Show more";
-                };
-                $this.text(linkText);
-
-                $content.toggleClass("show-content");
-                $content.toggleClass("hide-content");
 
 
-            });
 
         });
 
