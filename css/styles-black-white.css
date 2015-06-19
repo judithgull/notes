@@ -35,26 +35,21 @@ ul {
     margin: 0 auto;
 }
 
-.l-table {
-    display: table;
-    width: 100%;
+.l-flex {
+    display: flex;
+    height: auto;
+    align-items: flex-start;
 }
 
-.l-table-row {
-    display: table-row;
+.l-date {
+    width: 40%;
 }
-
-.l-table-cell {
-    display: table-cell;
-}
-
-.l-column-1,
-.l-column-3 {
+.l-rating, .l-edit {
     width: 20%;
 }
 
-.l-column-2 {
-    width: auto;
+.l-note {
+    width: 100%;
 }
 
 .l-align--right {
@@ -165,12 +160,12 @@ ul {
     font-size: 16px;
 }
 
-.tab-item--active{
+.tab-item--active {
     background-color: #333;
 }
 
-.tab-item--active .t-link{
-    color:white;
+.tab-item--active .t-link {
+    color: white;
 }
 
 .nav-filter .t-link {
@@ -188,24 +183,14 @@ ul {
     border-right: 1px solid gray;
 }
 
-/* Notes List */
-.note-title,
-.note-description {
-    display: inline-block;
-    width: 80%;
-}
+/* Add more text link */
 
-.hide-content {
-    overflow: hidden;
-    height: 2.3rem;
+a.morelink {
+    text-decoration:none;
+    outline: none;
 }
-
-.show-content {
-    height: auto;
-}
-
-.show-more {
-    display: inline-block;
+.morecontent span {
+    display: none;
 }
 
 /* Article Note Detail Page */
