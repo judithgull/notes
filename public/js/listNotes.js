@@ -50,10 +50,23 @@ $(function () {
                 var checkbox = $("#" + this.id);
                 var isChecked = checkbox.prop("checked") ? true : false;
                 var id = Number(checkbox.parents("li").attr("data-id"));
-                $.post("/markNoteFinished", JSON.stringify({id: id, checked: isChecked}),
-                    function () {
-                        reloadNotes();
-                    });
+
+                var completionDate = (isChecked) ? new Date() : null;
+                console.log(completionDate);
+                var data = {
+                    completionDate: completionDate
+                };
+
+                var requestSettings = {
+                    url: "/notes/" + id,
+                    data: data,
+                    type: "PUT"
+                };
+                $.ajax(requestSettings).done(function () {
+                    //jump to list view
+                    reloadNotes();
+                });
+
             });
 
             /**

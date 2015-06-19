@@ -60,14 +60,21 @@ module.exports.updateNote = function (req, res) {
 
             var body = req.body;
 
-            store.updateNote(
-                req.params.id,
-                body.title,
-                body.description,
-                body.dueDate,
-                body.importance,
-                body.completionDate
-            );
+            if (body.hasOwnProperty("title")) {
+                store.updateNote(
+                    req.params.id,
+                    body.title,
+                    body.description,
+                    body.dueDate,
+                    body.importance,
+                    body.completionDate
+                );
+            } else {
+                var isFinished = !(body.completionDate === "");
+                store.markFinished(req.params.id, isFinished);
+            }
+            res.send({});
+
         }
     });
 
