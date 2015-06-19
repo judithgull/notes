@@ -20,7 +20,7 @@ function getNotes() {
 function privateAddInitialNotes() {
     publicAddNote(
         "CAS FEE Selbststudium",
-        "HTML für die Note App erstellen.\nCSS erstellen für die Note App.\nmore text",
+        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
         moment().add(4, "day").toDate(),
         5,
         moment().subtract(5, "day").toDate()
