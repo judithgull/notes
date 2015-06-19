@@ -30,8 +30,8 @@ $(function () {
      * submit new or update existing note
      * */
     function submit() {
+        var id = getNoteId();
         var data = {
-            id: getNoteId(),
             title: $("#note-title").val(),
             description: $("#note-description").val(),
             dueDate: $("#note-due-date").val(),
@@ -39,15 +39,29 @@ $(function () {
             completionDate: completionDate
         };
 
-        var requestSettings = {
-            url: "/notes",
-            data: data,
-            type: (data.id === null) ? "POST" : "PUT"
-        };
-        $.ajax(requestSettings).done(function () {
-            //jump to list view
-            window.location.replace("/index.html");
-        });
+        if (id === null) {
+            var requestSettings = {
+                url: "/notes",
+                data: data,
+                type: "POST"
+            };
+            $.ajax(requestSettings).done(function () {
+                //jump to list view
+                window.location.replace("/index.html");
+            });
+        } else {
+            var requestSettings = {
+                url: "/notes/" + id,
+                data: data,
+                type: "PUT"
+            };
+            $.ajax(requestSettings).done(function () {
+                //jump to list view
+                window.location.replace("/index.html");
+            });
+
+        }
+
         return true;
     }
 

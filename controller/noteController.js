@@ -52,3 +52,23 @@ module.exports.addNote = function (req, res) {
     });
 
 };
+
+
+module.exports.updateNote = function (req, res) {
+    res.format({
+        'application/json': function () {
+
+            var body = req.body;
+
+            store.updateNote(
+                req.params.id,
+                body.title,
+                body.description,
+                body.dueDate,
+                body.importance,
+                body.completionDate
+            );
+        }
+    });
+
+};
