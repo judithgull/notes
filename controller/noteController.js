@@ -25,3 +25,14 @@ module.exports.getNotes = function (req, res) {
     });
 
 };
+
+
+module.exports.getNote = function (req, res) {
+    res.format({
+        'application/json': function () {
+            var note = store.getNote(req.params.id);
+            res.send(note);
+        }
+    });
+
+};

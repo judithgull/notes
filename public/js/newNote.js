@@ -17,7 +17,7 @@ $(function () {
      * query note with given id and update html
      * */
     function load(id) {
-        $.getJSON("/notes?id=" + id, function (note) {
+        $.getJSON("/notes/" + id, function (note) {
             $("#note-title").val(note.title);
             $("#note-description").val(note.description);
             $("#note-due-date").val(dateToString(note.dueDate));
