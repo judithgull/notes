@@ -183,12 +183,6 @@ ul {
     border-right: 1px solid gray;
 }
 
-/* Notes List */
-.note-title,
-.note-description {
-    display: inline-block;
-    width: 80%;
-}
 /* Add more text link */
 
 a.morelink {
