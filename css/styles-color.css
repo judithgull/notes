@@ -189,7 +189,15 @@ ul {
     display: inline-block;
     width: 80%;
 }
+/* Add more text link */
 
+a.morelink {
+    text-decoration:none;
+    outline: none;
+}
+.morecontent span {
+    display: none;
+}
 
 /* Article Note Detail Page */
 
