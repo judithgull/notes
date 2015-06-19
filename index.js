@@ -5,11 +5,21 @@ var storage = require('./services/noteStorage.js'),
     url = require("url"),
     http = require("http"),
     finalhandler = require("finalhandler"),
-    moment = require("moment");
+    moment = require("moment"),
+    express = require('express'),
+    bodyParser = require('body-parser');
+
+var app = express();
+
+var router = express.Router();
 
 
-var serve = serveStatic("public"),
-    server = http.createServer(function (req, res) {
+app.use(express.static(__dirname + '/public'))
+
+http.createServer(app).listen(3000);
+
+/*
+ var server = http.createServer(function (req, res) {
         var done = finalhandler(req, res);
         console.log(req.url);
         if (req.method === "POST"){
@@ -95,10 +105,9 @@ var serve = serveStatic("public"),
                     res.end(JSON.stringify(notes));
                 }
             }
-            else {
-                serve(req, res, done);
-            }
         }
     });
 
 server.listen(3000);
+
+ */
