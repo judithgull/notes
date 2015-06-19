@@ -1,6 +1,6 @@
 "use strict";
 
-var storage = require('./noteStorage.js'),
+var storage = require('./services/noteStorage.js'),
     serveStatic = require("serve-static"),
     url = require("url"),
     http = require("http"),
@@ -8,7 +8,7 @@ var storage = require('./noteStorage.js'),
     moment = require("moment");
 
 
-var serve = serveStatic("."),
+var serve = serveStatic("public"),
     server = http.createServer(function (req, res) {
         var done = finalhandler(req, res);
         console.log(req.url);
