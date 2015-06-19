@@ -14,30 +14,29 @@
     <h2 class="is-hidden">Note</h2>
 
     <form id="note" class="form" action="index.html">
-        <div class="l-table l-space-bottom--medium">
-            <div class="l-table-row">
-                <div class="l-table-cell l-column-1">
+            <div class="l-flex l-space-bottom--medium">
+                <div class="l-label">
                     <label for="note-title" class="label t-title">Title</label>
                 </div>
 
-                <div class="l-table-cell l-column-2">
-                    <input id="note-title" type="text" class="input l-space-bottom--medium">
+                <div class="l-content">
+                    <input id="note-title" type="text" class="input">
                 </div>
             </div>
-            <div class="l-table-row">
-                <div class="l-table-cell l-column-1">
+            <div class="l-flex l-space-bottom--medium">
+                <div class="l-label">
                     <label for="note-description">Description</label>
                 </div>
 
-                <div class="l-table-cell l-column-2">
-                    <textarea id="note-description" class="textarea l-space-bottom--medium"></textarea>
+                <div class="l-content">
+                    <textarea id="note-description" class="textarea"></textarea>
                 </div>
             </div>
-            <div class="l-table-row">
-                <div class="l-table-cell l-column-1">
+            <div class="l-flex l-space-bottom--medium">
+                <div class="l-label">
                     <label for="importance-rating">Importance</label>
                 </div>
-                <div id="importance-rating" class="l-table-cell l-column-2 importanceRating">
+                <div id="importance-rating" class="l-content importanceRating">
                     <input id="rating5" type="radio" name="rating" value="5">
                     <label for="rating5">5</label>
                     <input id="rating4" type="radio" name="rating" value="4">
@@ -50,16 +49,15 @@
                     <label for="rating1">1</label>
                 </div>
             </div>
-            <div class="l-table-row">
-                <div class="l-table-cell l-column-1">
+            <div class="l-flex l-space-bottom--medium">
+                <div class="l-label">
                     <label for="note-due-date">Due date:</label>
                 </div>
 
-                <div class="l-table-cell l-column-2">
+                <div class="l-content">
                     <input id="note-due-date" type="date">
                 </div>
             </div>
-        </div>
 
         <button class="btn btn--full l-space-bottom--medium" type="submit" value="Submit" name="save">
             <span class="t-paragraph">Save</span>
