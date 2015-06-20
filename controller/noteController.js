@@ -65,27 +65,34 @@ module.exports.addNote = function (req, res) {
 
 
 module.exports.updateNote = function (req, res) {
-    res.format({
-        'application/json': function () {
+    var body = req.body;
 
-            var body = req.body;
-
-            if (body.hasOwnProperty("title")) {
-                store.updateNote(
-                    req.params.id,
-                    body.title,
-                    body.description,
-                    body.dueDate,
-                    body.importance,
-                    body.completionDate
-                );
-            } else {
-                var isFinished = !(body.completionDate === "");
-                store.markFinished(req.params.id, isFinished);
+    function callback(err, data) {
+        res.format({
+            'application/json': function () {
+                res.send({});
             }
-            res.send({});
+        });
+    }
 
-        }
-    });
+    if (body.hasOwnProperty("title")) {
+        store.updateNote(
+            req.params.id,
+            body.title,
+            body.description,
+            body.dueDate,
+            body.importance,
+            body.completionDate,
+            callback
+        );
+    } else {
+        var isFinished = !(body.completionDate === "");
+        store.markFinished(req.params.id, isFinished);
+    }
+
+
+
+
+
 
 };

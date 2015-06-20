@@ -38,14 +38,8 @@ function publicMarkFinished(id, finished) {
     }
 }
 
-function privateUpdateNote(note) {
-    var notes = getNotes();
-    for (var i = 0; i < notes.length; i++) {
-        if (notes[i].id === note.id) {
-            notes[i] = note;
-        }
-    }
-    sessionStorage.setItem("notes", JSON.stringify(notes));
+function privateUpdateNote(id, note, callback) {
+    db.update({_id: id}, {$set: note}, {}, callback);
 }
 
 function publicGetNote(id, callback) {
@@ -66,9 +60,9 @@ function publicAddNote(title, description, dueDate, importance, completionDate, 
     });
 }
 
-function publicUpdateNote(id, title, description, dueDate, importance, completionDate) {
-    var note = new Note(id, title, description, dueDate, importance, completionDate);
-    return privateUpdateNote(note);
+function publicUpdateNote(id, title, description, dueDate, importance, completionDate, callback) {
+    var note = new Note(title, description, dueDate, importance, completionDate);
+    return privateUpdateNote(id, note, callback);
 }
 
 function publicGetByImportance(includeFinished, callback) {
