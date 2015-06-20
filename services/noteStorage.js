@@ -48,16 +48,12 @@ function privateUpdateNote(note) {
     sessionStorage.setItem("notes", JSON.stringify(notes));
 }
 
-function publicGetNote(id) {
-    var id = Number(id);
-    var notes = getNotes();
-    for (var i = 0; i < notes.length; i++) {
-        var note = notes[i];
-        if (note.id === id) {
-            return note;
+function publicGetNote(id, callback) {
+    db.findOne({_id: id}, function (err, note) {
+        if (callback) {
+            callback(err, note);
         }
-    }
-    return null;
+    });
 }
 
 function publicAddNote(title, description, dueDate, importance, completionDate, callback) {

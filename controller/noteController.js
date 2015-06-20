@@ -32,13 +32,13 @@ module.exports.getNotes = function (req, res) {
 
 
 module.exports.getNote = function (req, res) {
-    res.format({
-        'application/json': function () {
-            var note = store.getNote(req.params.id);
-            res.send(note);
-        }
+    store.getNote(req.params.id, function (err, note) {
+        res.format({
+            'application/json': function () {
+                res.send(note);
+            }
+        });
     });
-
 };
 
 module.exports.addNote = function (req, res) {
