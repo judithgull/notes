@@ -49,10 +49,9 @@ $(function () {
             notesCheckboxes.on("click", function () {
                 var checkbox = $("#" + this.id);
                 var isChecked = checkbox.prop("checked") ? true : false;
-                var id = Number(checkbox.parents("li").attr("data-id"));
+                var id = checkbox.parents("li").attr("data-id");
 
                 var completionDate = (isChecked) ? new Date() : null;
-                console.log(completionDate);
                 var data = {
                     completionDate: completionDate
                 };
@@ -132,8 +131,7 @@ $(function () {
             if (!datetime) {
                 return "someday";
             }
-
-            var m = moment(datetime);
+            var m = moment(JSON.parse(datetime));
             if (isToday(m)) {
                 return "today";
             }

@@ -64,7 +64,7 @@ module.exports.updateNote = function (req, res) {
         });
     }
 
-    if (body.hasOwnProperty("title")) {
+    if (isFullNoteUpdate(body)) {
         store.updateNote(
             req.params.id,
             body.title,
@@ -75,13 +75,18 @@ module.exports.updateNote = function (req, res) {
             callback
         );
     } else {
-        var isFinished = !(body.completionDate === "");
-        store.markFinished(req.params.id, isFinished);
+        store.updateCompletionDate(
+            req.params.id,
+            body.completionDate);
     }
-
-
-
-
-
-
 };
+
+function isFullNoteUpdate(body) {
+    if (body.hasOwnProperty("title")
+        && body.hasOwnProperty("description")
+        && body.hasOwnProperty("dueDate")
+        && body.hasOwnProperty("importance")) {
+        return true;
+    }
+    return false;
+}
