@@ -14,33 +14,6 @@ function getNotes(callback) {
     });
 }
 
-/*
- * Dummy data to show when page is initially loaded
- * */
-function privateAddInitialNotes() {
-    publicAddNote(
-        "CAS FEE Selbststudium",
-        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-        moment().add(4, "day").toDate(),
-        5,
-        moment().subtract(5, "day").toDate()
-    );
-    publicAddNote(
-        "Einkaufen",
-        "Eier\nButter",
-        moment().toDate(),
-        1,
-        new Date()
-    );
-    publicAddNote(
-        "Mami anrufen",
-        "888 888 88 88",
-        null,
-        0,
-        null
-    );
-}
-
 function Note(title, description, dueDate, importance, completionDate) {
     this.title = String(title);
     this.description = String(description);
