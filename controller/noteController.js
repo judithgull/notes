@@ -3,20 +3,18 @@ var store = require("../services/noteStorage.js"),
 
 
 module.exports.getNotes = function (req, res) {
-    res.format({
-        'application/json': function () {
+    var queryObject = url.parse(req.url, true).query;
 
-            var queryObject = url.parse(req.url, true).query;
+    var includeFinished = queryObject["includeFinished"] === "true";
+    var sortOrder = queryObject["sorting"];
 
-            var includeFinished = queryObject["includeFinished"] === "true";
-            var sortOrder = queryObject["sorting"];
-
-            store.getNotes(sortOrder, includeFinished, function callback(err, notes) {
+    store.getNotes(sortOrder, includeFinished, function callback(err, notes) {
+        res.format({
+            'application/json': function () {
                 res.send(notes);
-            });
-        }
+            }
+        });
     });
-
 };
 
 

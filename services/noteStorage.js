@@ -8,10 +8,10 @@ function Note(title, description, dueDate, importance, completionDate) {
     this.dueDate = stringifyDate(dueDate);
     this.importance = Number(importance);
     this.completionDate = stringifyDate(completionDate);
+}
 
-    function stringifyDate(date) {
-        return (date == null || date.length === 0) ? "" : JSON.stringify(new Date(date));
-    }
+function stringifyDate(date) {
+    return (date == null || date.length === 0) ? "" : JSON.stringify(new Date(date));
 }
 
 function publicGetNotes(sortOrderStr, includeFinished, callback) {
@@ -37,25 +37,6 @@ function getSortOrder(sortOrderStr) {
     }
 }
 
-function publicMarkFinished(id, finished) {
-    var note = publicGetNote(id);
-    if (note && finished) {
-        note.completionDate = new Date();
-        privateUpdateNote(note);
-    }
-    else if (note) {
-        note.completionDate = null;
-        privateUpdateNote(note);
-    }
-    else {
-        console.error("Note not found for id " + id);
-    }
-}
-
-function privateUpdateNote(id, note, callback) {
-    db.update({_id: id}, {$set: note}, {}, callback);
-}
-
 function publicGetNote(id, callback) {
     db.findOne({_id: id}, function (err, note) {
         if (callback) {
@@ -76,7 +57,11 @@ function publicAddNote(title, description, dueDate, importance, completionDate, 
 
 function publicUpdateNote(id, title, description, dueDate, importance, completionDate, callback) {
     var note = new Note(title, description, dueDate, importance, completionDate);
-    return privateUpdateNote(id, note, callback);
+    db.update({_id: id}, {$set: note}, {}, callback);
+}
+
+function publicUpdateCompletionDate(id, completionDate, callback) {
+    db.update({_id: id}, {$set: {completionDate: stringifyDate(completionDate)}}, {}, callback);
 }
 
 module.exports = {
@@ -86,10 +71,26 @@ module.exports = {
      * @param callback
      * */
     getNotes: publicGetNotes,
-    addNote: publicAddNote,
-    markFinished: publicMarkFinished, //Mark note with a given id as finished/unfinished
+    /**
+     * @param id
+     * @param callback
+     * */
     getNote: publicGetNote,
-    updateNote: publicUpdateNote
+    /**
+     * @param id
+     * @param callback
+     * */
+    addNote: publicAddNote,
+    /**
+     * @param id
+     * @param callback
+     * */
+    updateNote: publicUpdateNote,
+
+    /**
+     * @param id
+     * @param completionDate
+     * @param callback
+     * */
+    updateCompletionDate: publicUpdateCompletionDate
 };
-
-
