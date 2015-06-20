@@ -12,14 +12,14 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment-with-locales.min.js"></script>
     <script id="notes-entry-template" type="text/x-handlebars-template">
         {{#each this}}
-        <li class="note-list-item l-space-bottom--medium" data-id="{{id}}">
+        <li class="note-list-item l-space-bottom--medium" data-id="{{_id}}">
             <article class="l-flex">
                 <div class="l-date">
                     <p class="note-due-date t-date">{{{formatDate dueDate}}}</p>
-                    <input id="note-finished-{{id}}" type="checkbox"
+                    <input id="note-finished-{{_id}}" type="checkbox"
                            {{#if completionDate}} checked="checked" {{/if}}
                     >
-                    <label for="note-finished-{{id}}">Finished {{#if completionDate}}[{{{formatDate completionDate}}}]{{/if}}</label>
+                    <label for="note-finished-{{_id}}">Finished {{#if completionDate}}[{{{formatDate completionDate}}}]{{/if}}</label>
                 </div>
                 <div class="l-content">
                     <h3 class="note-title t-title">{{title}}</h3>
@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="l-edit">
-                    <button id="edit-btn-{{id}}" class="btn btn--full" name="edit">
+                    <button id="edit-btn-{{_id}}" class="btn btn--full" name="edit">
                         <span class="t-paragraph">Edit</span>
                     </button>
                 </div>

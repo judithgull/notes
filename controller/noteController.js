@@ -10,17 +10,21 @@ module.exports.getNotes = function (req, res) {
 
             var includeFinished = queryObject["includeFinished"] === "true";
             var sorting = queryObject["sorting"];
-            var notes;
+
+            function callback(err, notes){
+                res.send(notes);
+            }
+
             if (sorting === "sort-by-completion") {
-                notes = store.getByCompletion(includeFinished);
+                notes = store.getByCompletion(includeFinished, callback);
             } else if (sorting === "sort-by-creation") {
-                notes = store.getByCreation(includeFinished);
+                notes = store.getByCreation(includeFinished, callback);
             } else if (sorting === "sort-by-importance") {
-                notes = store.getByImportance(includeFinished);
+                notes = store.getByImportance(includeFinished, callback);
             } else {
 
             }
-            res.send(notes);
+
         }
     });
 
@@ -47,7 +51,13 @@ module.exports.addNote = function (req, res) {
                 body.title,
                 body.description,
                 body.dueDate,
-                body.importance);
+                body.importance, function (err, note) {
+                    res.format({
+                        'application/json': function () {
+                            res.json(note);
+                        }
+                    });
+                });
         }
     });
 
