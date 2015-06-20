@@ -6,14 +6,12 @@ var db = new Datastore({ filename: './data/notes.db', autoload: true });
 //only use de-CH formatted dates
 moment.locale("de-CH");
 
-function getNotes() {
-    var notesStr = sessionStorage.getItem("notes");
-    if (!notesStr) {
-        var emptyNotesStr = JSON.stringify([]);
-        sessionStorage.setItem("notes", emptyNotesStr);
-        privateAddInitialNotes();
-    }
-    return JSON.parse(sessionStorage.getItem("notes"));
+function getNotes(callback) {
+    db.find({}, function (err, notes) {
+        if (callback) {
+            callback(err, notes);
+        }
+    });
 }
 
 /*
@@ -43,20 +41,13 @@ function privateAddInitialNotes() {
     );
 }
 
-function Note(id, title, description, dueDate, importance, completionDate) {
-    this.id = Number(id);
+function Note(title, description, dueDate, importance, completionDate) {
     this.title = String(title);
     this.description = String(description);
     this.creationDate = new Date();
     this.dueDate = dueDate; //TODO Date()...
     this.importance = Number(importance);
     this.completionDate = completionDate;
-}
-
-function privateStoreNote(note) {
-    var notes = getNotes();
-    notes.push(note);
-    sessionStorage.setItem("notes", JSON.stringify(notes));
 }
 
 function publicMarkFinished(id, finished) {
@@ -96,13 +87,14 @@ function publicGetNote(id) {
     return null;
 }
 
-function publicAddNote(title, description, dueDate, importance, completionDate) {
-    var id = getNotes().length;
-    var note = new Note(id, title, description, dueDate, importance, completionDate);
-    privateStoreNote(note);
-    console.log("New note added");
-    console.log(note);
-    return note;
+function publicAddNote(title, description, dueDate, importance, completionDate, callback) {
+    var note = new Note(title, description, dueDate, importance, completionDate);
+
+    db.insert(note, function (err, newNote) {
+        if (callback) {
+            callback(err, newNote);
+        }
+    });
 }
 
 function publicUpdateNote(id, title, description, dueDate, importance, completionDate) {
@@ -110,35 +102,36 @@ function publicUpdateNote(id, title, description, dueDate, importance, completio
     return privateUpdateNote(note);
 }
 
-function publicGetByImportance(includeFinished) {
-    return getSortedNotes(function (n1, n2) {
+function publicGetByImportance(includeFinished, callback) {
+    getSortedNotes(function (n1, n2) {
         return n2.importance - n1.importance;
-    }, includeFinished);
+    }, includeFinished, callback);
 }
 
 
-function publicGetByCreation(includeFinished) {
-    return getSortedNotes(function (n1, n2) {
+function publicGetByCreation(includeFinished, callback) {
+    getSortedNotes(function (n1, n2) {
         return privateGetDatesDescSortOrder(n1.creationDate, n2.creationDate);
-    }, includeFinished);
+    }, includeFinished, callback);
 }
 
 
-function publicGetByCompletion(includeFinished) {
-    return getSortedNotes(function (n1, n2) {
+function publicGetByCompletion(includeFinished, callback) {
+    getSortedNotes(function (n1, n2) {
         return privateGetDatesDescSortOrder(n1.completionDate, n2.completionDate);
-    }, includeFinished);
+    }, includeFinished, callback);
 }
 
-function getSortedNotes(sortOrder, includeFinished) {
-    var notes = getNotes();
-    if (!includeFinished) {
-        notes = notes.filter(function (n) {
-            return n.completionDate == null;
-        });
-    }
-    notes = notes.sort(sortOrder);
-    return notes;
+function getSortedNotes(sortOrder, includeFinished, callback) {
+    getNotes(function (err, notes) {
+        if (!includeFinished) {
+            notes = notes.filter(function (n) {
+                return n.completionDate == null;
+            });
+        }
+        notes = notes.sort(sortOrder);
+        callback(err, notes);
+    });
 }
 
 
