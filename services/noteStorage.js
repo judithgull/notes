@@ -1,10 +1,19 @@
 var moment = require("moment");
-var sessionStorage = require("localStorage");
 var Datastore = require('nedb');
 var db = new Datastore({filename: './data/notes.db', autoload: true});
 
-//only use de-CH formatted dates
-moment.locale("de-CH");
+function Note(title, description, dueDate, importance, completionDate) {
+    this.title = String(title);
+    this.description = String(description);
+    this.creationDate = stringifyDate(new Date());
+    this.dueDate = stringifyDate(dueDate);
+    this.importance = Number(importance);
+    this.completionDate = stringifyDate(completionDate);
+
+    function stringifyDate(date) {
+        return (date == null || date.length === 0) ? "" : JSON.stringify(new Date(date));
+    }
+}
 
 function getNotes(callback) {
     db.find({}, function (err, notes) {
@@ -21,6 +30,7 @@ function getNotes(callback) {
  * Dummy data to show when page is initially loaded
  * */
 function privateAddInitialNotes() {
+    moment.locale("de-CH");
     publicAddNote(
         "CAS FEE Selbststudium",
         "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
@@ -42,15 +52,6 @@ function privateAddInitialNotes() {
         0,
         ""
     );
-}
-
-function Note(title, description, dueDate, importance, completionDate) {
-    this.title = String(title);
-    this.description = String(description);
-    this.creationDate = new Date();
-    this.dueDate = dueDate; //TODO Date()...
-    this.importance = Number(importance);
-    this.completionDate = (completionDate.length === 0) ? "" : JSON.stringify(new Date(completionDate));
 }
 
 function publicMarkFinished(id, finished) {
