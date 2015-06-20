@@ -9,22 +9,11 @@ module.exports.getNotes = function (req, res) {
             var queryObject = url.parse(req.url, true).query;
 
             var includeFinished = queryObject["includeFinished"] === "true";
-            var sorting = queryObject["sorting"];
+            var sortOrder = queryObject["sorting"];
 
-            function callback(err, notes){
+            store.getNotes(sortOrder, includeFinished, function callback(err, notes) {
                 res.send(notes);
-            }
-
-            if (sorting === "sort-by-completion") {
-                notes = store.getByCompletion(includeFinished, callback);
-            } else if (sorting === "sort-by-creation") {
-                notes = store.getByCreation(includeFinished, callback);
-            } else if (sorting === "sort-by-importance") {
-                notes = store.getByImportance(includeFinished, callback);
-            } else {
-
-            }
-
+            });
         }
     });
 
