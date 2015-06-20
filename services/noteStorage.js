@@ -1,7 +1,7 @@
 var moment = require("moment");
 var sessionStorage = require("localStorage");
 var Datastore = require('nedb');
-var db = new Datastore({ filename: './data/notes.db', autoload: true });
+var db = new Datastore({filename: './data/notes.db', autoload: true});
 
 //only use de-CH formatted dates
 moment.locale("de-CH");
