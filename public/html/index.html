@@ -17,9 +17,10 @@
                 <div class="l-date">
                     <p class="note-due-date t-date">{{{formatDate dueDate}}}</p>
                     <input id="note-finished-{{_id}}" type="checkbox"
-                           {{#if completionDate}} checked="checked" {{/if}}
+                           {{#if completionDate.length}} checked="checked" {{/if}}
                     >
-                    <label for="note-finished-{{_id}}">Finished {{#if completionDate}}[{{{formatDate completionDate}}}]{{/if}}</label>
+                    <label for="note-finished-{{_id}}">Finished {{#if completionDate.length}}[{{{formatDate
+                        completionDate}}}]{{/if}}</label>
                 </div>
                 <div class="l-content">
                     <h3 class="note-title t-title">{{title}}</h3>

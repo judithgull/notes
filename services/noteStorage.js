@@ -8,10 +8,40 @@ moment.locale("de-CH");
 
 function getNotes(callback) {
     db.find({}, function (err, notes) {
-        if (callback) {
+        if (notes.length === 0) {
+            privateAddInitialNotes();
+            getNotes(callback);
+        } else if (callback) {
             callback(err, notes);
         }
     });
+}
+
+/*
+ * Dummy data to show when page is initially loaded
+ * */
+function privateAddInitialNotes() {
+    publicAddNote(
+        "CAS FEE Selbststudium",
+        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+        moment().add(4, "day").toDate(),
+        5,
+        moment().subtract(5, "day").toDate().toDateString()
+    );
+    publicAddNote(
+        "Einkaufen",
+        "Eier\nButter",
+        moment().toDate(),
+        1,
+        new Date().toDateString()
+    );
+    publicAddNote(
+        "Mami anrufen",
+        "888 888 88 88",
+        null,
+        0,
+        ""
+    );
 }
 
 function Note(title, description, dueDate, importance, completionDate) {
@@ -20,7 +50,7 @@ function Note(title, description, dueDate, importance, completionDate) {
     this.creationDate = new Date();
     this.dueDate = dueDate; //TODO Date()...
     this.importance = Number(importance);
-    this.completionDate = completionDate;
+    this.completionDate = (completionDate.length === 0) ? "" : JSON.stringify(new Date(completionDate));
 }
 
 function publicMarkFinished(id, finished) {
@@ -89,7 +119,7 @@ function getSortedNotes(sortOrder, includeFinished, callback) {
     getNotes(function (err, notes) {
         if (!includeFinished) {
             notes = notes.filter(function (n) {
-                return n.completionDate == null;
+                return n.completionDate === "";
             });
         }
         notes = notes.sort(sortOrder);
