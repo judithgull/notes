@@ -15,16 +15,7 @@ function Note(title, description, dueDate, importance, completionDate) {
     }
 }
 
-function getNotes(callback) {
-    db.find({}, function (err, notes) {
-        if (notes.length === 0) {
-            privateAddInitialNotes();
-            getNotes(callback);
-        } else if (callback) {
-            callback(err, notes);
-        }
-    });
-}
+
 
 /*
  * Dummy data to show when page is initially loaded
@@ -117,17 +108,35 @@ function publicGetByCompletion(includeFinished, callback) {
 }
 
 function getSortedNotes(sortOrder, includeFinished, callback) {
-    getNotes(function (err, notes) {
-        if (!includeFinished) {
-            notes = notes.filter(function (n) {
-                return n.completionDate === "";
-            });
-        }
+    var filter = includeFinished ? {} : {completionDate: ""};
+
+
+    getNotes(filter, function (err, notes) {
         notes = notes.sort(sortOrder);
         callback(err, notes);
     });
 }
 
+function getNotes(filter, callback) {
+    db.find(filter, function (err, notes) {
+        if (callback) {
+            callback(err, notes);
+        }
+    });
+}
+
+/*
+ function getNotes(filter, callback) {
+ db.find(filter, function (err, notes) {
+ if (notes.length === 0) {
+ privateAddInitialNotes();
+ getNotes(filter, callback);
+ } else if (callback) {
+ callback(err, notes);
+ }
+ });
+ }
+ */
 
 /**
  * Compares two dates: last date first, null values last.
