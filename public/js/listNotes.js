@@ -74,7 +74,7 @@ $(function () {
             var editButtons = $("#js-notes-list").find("button");
             editButtons.on("click", function () {
                 var id = $("#" + this.id).parents("li").attr("data-id");
-                location.href = "note.html?id=" + id;
+                location.href = "html/note.html?id=" + id;
             });
 
 
