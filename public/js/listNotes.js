@@ -1,10 +1,15 @@
 "use strict";
+;
 $(function () {
     moment.locale("en-US");
     registerHandlebarsHelpers();
     var createNotesHtml = Handlebars.compile($("#notes-entry-template").html());
 
-    reloadNotes();
+    var pollingObserver = window.pollingObserver;
+    pollingObserver.addChangeListener(function () {
+        reloadNotes();
+    });
+
 
     /**
      * Register Click-Handler on Sort Tabs
@@ -74,7 +79,7 @@ $(function () {
             var editButtons = $("#js-notes-list").find("button");
             editButtons.on("click", function () {
                 var id = $("#" + this.id).parents("li").attr("data-id");
-                location.href = "html/note.html?id=" + id;
+                location.href = "note.html?id=" + id;
             });
 
 
@@ -140,5 +145,6 @@ $(function () {
 
         Handlebars.registerHelper("formatDate", formatDate);
     }
+
 
 });
