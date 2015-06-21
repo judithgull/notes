@@ -38,7 +38,9 @@ module.exports.addNote = function (req, res) {
                 body.title,
                 body.description,
                 body.dueDate,
-                body.importance, function (err, note) {
+                body.importance,
+                "",
+                function (err, note) {
                     res.format({
                         'application/json': function () {
                             res.json(note);
@@ -69,13 +71,13 @@ module.exports.updateNote = function (req, res) {
             body.description,
             body.dueDate,
             body.importance,
-            body.completionDate,
             callback
         );
     } else {
         store.updateCompletionDate(
             req.params.id,
-            body.completionDate);
+            body.completionDate,
+            callback);
     }
 };
 

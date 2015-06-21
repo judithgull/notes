@@ -7,7 +7,10 @@ function Note(title, description, dueDate, importance, completionDate) {
     this.creationDate = stringifyDate(new Date());
     this.dueDate = stringifyDate(dueDate);
     this.importance = Number(importance);
-    this.completionDate = stringifyDate(completionDate);
+
+    if (arguments.length > 4) {
+        this.completionDate = stringifyDate(completionDate);
+    }
 }
 
 function stringifyDate(date) {
@@ -55,8 +58,8 @@ function publicAddNote(title, description, dueDate, importance, completionDate, 
     });
 }
 
-function publicUpdateNote(id, title, description, dueDate, importance, completionDate, callback) {
-    var note = new Note(title, description, dueDate, importance, completionDate);
+function publicUpdateNote(id, title, description, dueDate, importance, callback) {
+    var note = new Note(title, description, dueDate, importance);
     db.update({_id: id}, {$set: note}, {}, callback);
 }
 

@@ -4,8 +4,6 @@
 $(function () {
     var id = getNoteId();
 
-    var completionDate = null;
-
 
     if (id !== null) {
         load(id);
@@ -20,9 +18,8 @@ $(function () {
         $.getJSON("/notes/" + id, function (note) {
             $("#note-title").val(note.title);
             $("#note-description").val(note.description);
-            $("#note-due-date").val(dateToString(note.dueDate));
+            $("#note-due-date").val(formatToDay(note.dueDate));
             $("#importance-rating").find("[value=" + note.importance + "]").prop("checked", true);
-            completionDate = note.completionDate;
         });
     }
 
@@ -35,8 +32,7 @@ $(function () {
             title: $("#note-title").val(),
             description: $("#note-description").val(),
             dueDate: $("#note-due-date").val(),
-            importance: getRating(),
-            completionDate: completionDate
+            importance: getRating()
         };
 
         if (id === null) {
@@ -65,9 +61,9 @@ $(function () {
         return true;
     }
 
-    function dateToString(date) {
+    function formatToDay(date) {
         if (date) {
-            return moment(date).format('YYYY-MM-DD');
+            return moment(JSON.parse(date)).format('YYYY-MM-DD');
         }
         return null;
     }
@@ -83,7 +79,7 @@ $(function () {
 
     function getRating() {
         var checkedRadio = $("#importance-rating").find(":checked");
-        if (checkedRadio) return checkedRadio.attr("value");
+        if (checkedRadio.length>0) return checkedRadio.attr("value");
         else return 0;
     }
 });
