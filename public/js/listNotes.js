@@ -1,6 +1,6 @@
-"use strict";
 ;
 $(function () {
+    "use strict";
     moment.locale("en-US");
     registerHandlebarsHelpers();
     var createNotesHtml = Handlebars.compile($("#notes-entry-template").html());
@@ -42,9 +42,11 @@ $(function () {
         var sortOrderId = $(".tab-item--active").children().first().attr("id");
         var isShowFinished = Boolean($(".btn--active").length);
 
-        var getNotesUrl = "/notes?sorting=" + sortOrderId + "&includeFinished=" + isShowFinished;
+        restClient.getNotes(
+            sortOrderId,
+            isShowFinished,
+            function (notes) {
 
-        $.getJSON(getNotesUrl, function (notes) {
             document.getElementById("js-notes-list").innerHTML = createNotesHtml(notes);
 
             /**
@@ -52,25 +54,14 @@ $(function () {
              */
             var notesCheckboxes = $("#js-notes-list").find("[type=\"checkbox\"]");
             notesCheckboxes.on("click", function () {
+
                 var checkbox = $("#" + this.id);
                 var isChecked = checkbox.prop("checked") ? true : false;
                 var id = checkbox.parents("li").attr("data-id");
 
                 var completionDate = (isChecked) ? new Date() : null;
-                var data = {
-                    completionDate: completionDate
-                };
 
-                var requestSettings = {
-                    url: "/notes/" + id,
-                    data: data,
-                    type: "PUT"
-                };
-                $.ajax(requestSettings).done(function () {
-                    //jump to list view
-                    reloadNotes();
-                });
-
+                restClient.updateCompletionDate(id, completionDate, reloadNotes);
             });
 
             /**
