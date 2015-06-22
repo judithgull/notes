@@ -2,7 +2,7 @@
  * Keeps track of the notes on the client using polling.
  * */
 ;
-(function ($) {
+(function () {
     "use strict";
 
     var notes = [];
@@ -60,19 +60,19 @@
     }
 
     function getNotesFromServer() {
-        var queryString = "?sorting=" + getSortOrder() + "&includeFinished=" + getIncludeFinished();
-        var notesPath = "/notes";
-        var url = notesPath + queryString;
-        $.getJSON(url, function (newNotes) {
-            if (listeners.length > 0 && hasChanged(newNotes)) {
-                notes = newNotes;
-                notifyListeners();
+        window.restClient.getNotes(
+            getSortOrder(),
+            getIncludeFinished(),
+            function (newNotes) {
+                if (listeners.length > 0 && hasChanged(newNotes)) {
+                    notes = newNotes;
+                    notifyListeners();
+                }
             }
-        });
+        );
     }
 
     function notifyListeners() {
-        console.log("notify change!");
         var i;
         for (i = 0; i < listeners.length; i++) {
             listeners[i]();
@@ -120,4 +120,4 @@
         removeChangeListener: removeChangeListener
     };
 
-}(jQuery));
+}());
