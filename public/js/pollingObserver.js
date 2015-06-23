@@ -13,10 +13,7 @@
     /**
      * Start polling
      * */
-    poll(function () {
-            getNotesFromServer();
-        }
-    );
+    poll(getNotesFromServer);
 
     function poll(callback, interval) {
         interval = interval || 1000;
@@ -60,7 +57,7 @@
     }
 
     function getNotesFromServer() {
-        window.restClient.getNotes(
+        restClient.getNotes(
             getSortOrder(),
             getIncludeFinished(),
             function (newNotes) {

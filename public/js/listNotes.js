@@ -5,7 +5,6 @@ $(function () {
     registerHandlebarsHelpers();
     var createNotesHtml = Handlebars.compile($("#notes-entry-template").html());
 
-    var pollingObserver = window.pollingObserver;
     pollingObserver.addChangeListener(function () {
         reloadNotes();
     });
