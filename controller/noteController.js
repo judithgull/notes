@@ -1,6 +1,6 @@
 var store = require("../services/noteStorage.js"),
-    url = require("url");
-
+    url = require("url"),
+    path = require('path');
 
 module.exports.getNotes = function (req, res) {
     var queryObject = url.parse(req.url, true).query;
@@ -21,7 +21,10 @@ module.exports.getNotes = function (req, res) {
 module.exports.getNote = function (req, res) {
     store.getNote(req.params.id, function (err, note) {
         res.format({
-            'application/json': function () {
+            "text/html": function () {
+                res.render("noteForm.hbs", note);
+            },
+            "application/json": function () {
                 res.send(note);
             }
         });
@@ -58,6 +61,9 @@ module.exports.updateNote = function (req, res) {
 
     function callback(err, data) {
         res.format({
+            'text/html': function () {
+                res.redirect("/");
+            },
             'application/json': function () {
                 res.send({});
             }
