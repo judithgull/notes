@@ -10,17 +10,12 @@
             completionDate: completionDate
         };
         var requestSettings = {
-            url: "/notes/" + id,
+            url: notesPath + "/" + id,
             data: data,
             type: "PUT"
         };
-        $.ajax(requestSettings).done(function () {
-            doneCallback();
-        });
-
+        $.ajax(requestSettings);
     }
-
-
 
     function getNotes(sortOrder, includeFinished, callback) {
         var queryString = "?sorting=" + sortOrder + "&includeFinished=" + includeFinished;
