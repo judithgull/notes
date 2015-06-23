@@ -40,6 +40,10 @@ module.exports.addNote = function (req, res) {
 
             var body = req.body;
 
+            if (!body.importance) {
+                body.importance = 0;
+            }
+
             store.addNote(
                 body.title,
                 body.description,
