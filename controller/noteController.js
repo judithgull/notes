@@ -4,7 +4,7 @@ var store = require("../services/noteStorage.js"),
 module.exports.getNotes = function (req, res) {
     res.format({
         "text/html": function (req, res) {
-            res.render("noteForm.hbs", {_method: "post"});
+            res.render("noteForm", {_method: "post"});
         },
         "application/json": function (req, res) {
             var queryObject = url.parse(req.url, true).query;
@@ -25,7 +25,7 @@ module.exports.getNote = function (req, res) {
         res.format({
             "text/html": function () {
                 note._method = "put";
-                res.render("noteForm.hbs", note);
+                res.render("noteForm", note);
             },
             "application/json": function () {
                 res.send(note);
