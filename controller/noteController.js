@@ -1,6 +1,5 @@
 var store = require("../services/noteStorage.js"),
-    url = require("url"),
-    path = require('path');
+    url = require("url");
 
 module.exports.getNotes = function (req, res) {
     res.format({
@@ -66,22 +65,14 @@ module.exports.addNote = function (req, res) {
 module.exports.updateNote = function (req, res) {
     var body = req.body;
 
-    function callback(err, data) {
-        res.format({
-            'text/html': function () {
-                res.send({});
-            },
-            'application/json': function () {
-                res.send({});
-            }
-        });
-    }
-
     if (isCompletionDateUpdate(body)) {
         store.updateCompletionDate(
             req.params.id,
             body.completionDate,
-            callback);
+            function () {
+                res.send({});
+            }
+        );
     } else {
 
         if (!body.importance) {
@@ -94,7 +85,9 @@ module.exports.updateNote = function (req, res) {
             body.description,
             body.dueDate,
             body.importance,
-            callback
+            function () {
+                res.redirect("/");
+            }
         );
     }
 };

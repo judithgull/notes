@@ -5,7 +5,7 @@
     var notesPath = "/notes";
 
 
-    function updateCompletionDate(id, completionDate, doneCallback) {
+    function updateCompletionDate(id, completionDate, callback) {
         var data = {
             completionDate: completionDate
         };
@@ -14,7 +14,11 @@
             data: data,
             type: "PUT"
         };
-        $.ajax(requestSettings);
+        $.ajax(requestSettings).done(function () {
+            if (callback) {
+                callback();
+            }
+        });
     }
 
     function getNotes(sortOrder, includeFinished, callback) {
