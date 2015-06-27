@@ -22,6 +22,9 @@ $(function () {
         if (insertedNotes.length > 0) {
             insertNotes(insertedNotes);
         }
+        if (updatedNotes.length > 0) {
+            updateNotes(updatedNotes)
+        }
     });
 
 
@@ -66,6 +69,15 @@ $(function () {
             } else {
                 $("#js-notes-list").prepend(notesHtml);
             }
+        }
+    }
+
+    function updateNotes(notes) {
+        for (var i = 0; i < notes.length; i++) {
+            var newNote = notes[i];
+            var notesHtml = createNotesHtml([newNote]);
+            var element = $("#note-" + newNote._id);
+            element.replaceWith(notesHtml);
         }
     }
 

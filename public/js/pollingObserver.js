@@ -50,27 +50,33 @@
             function (newNotes) {
                 if (listeners.length > 0 && hasChanged(newNotes)) {
 
-                    var updatedNotes = [];
-                    var newNoteIds = getIdsAsProperties(newNotes);
+                    var newNoteIds = getIdMap(newNotes);
 
                     var removedNotes = [];
                     for (var i = 0; i < notes.length; i ++) {
                         var noteId = notes[i]._id;
-                        if (newNoteIds.hasOwnProperty(noteId) === false) {
+                        if (!newNoteIds.hasOwnProperty(noteId)) {
                             removedNotes.push(notes[i]);
                         }
                     }
 
                     var insertedNotes = [];
-                    var origNotesIds = getIdsAsProperties(notes);
+                    var updatedNotes = [];
+                    var origNotesIds = getIdMap(notes);
                     for (var i = 0; i < newNotes.length; i ++) {
-                        var noteId = newNotes[i]._id;
-                        if (origNotesIds.hasOwnProperty(noteId) === false) {
-                            var noteToInsert = newNotes[i];
+                        var newNote = newNotes[i];
+                        var noteId = newNote._id;
+
+                        if (!origNotesIds.hasOwnProperty(noteId)) {
                             if(i!=0) {
-                                noteToInsert.previousId = newNotes[i - 1]._id;
+                                newNote.previousId = newNotes[i - 1]._id;
                             }
-                            insertedNotes.push(noteToInsert);
+                            insertedNotes.push(newNote);
+                        } else {
+                            var origNote = origNotesIds[noteId];
+                            if (!equals(origNote, newNote)) {
+                                updatedNotes.push(newNote);
+                            }
                         }
                     }
 
@@ -81,13 +87,14 @@
         );
     }
 
-    function getIdsAsProperties(noteList){
+    function getIdMap(noteList) {
         var noteIds = {};
         for (var i = 0; i < noteList.length; i++ ) {
-            noteIds[noteList[i]._id] = true;
+            var note = noteList[i]
+            noteIds[note._id] = note;
         }
         return noteIds;
-    };
+    }
 
     function notifyListeners(insertedNotes, updatedNotes, removedNotes) {
         var i;
