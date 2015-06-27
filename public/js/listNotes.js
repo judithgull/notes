@@ -13,8 +13,15 @@ $(function () {
 
     var createNotesHtml = Handlebars.compile($("#notes-entry-template").html());
 
-    pollingObserver.addChangeListener(function () {
-        reloadNotes();
+    reloadNotes();
+
+    pollingObserver.addChangeListener(function (insertedNotes, updatedNotes, removedNotes) {
+        if (removedNotes.length > 0) {
+            removeNotes(removedNotes);
+        }
+        if (insertedNotes.length > 0) {
+            insertNotes(insertedNotes);
+        }
     });
 
 
@@ -49,9 +56,31 @@ $(function () {
         reloadNotes();
     });
 
+    function insertNotes(notes) {
+        for (var i = 0; i < notes.length; i++) {
+            var newNote = notes[i];
+            var notesHtml = createNotesHtml([newNote]);
+            if (newNote.previousId) {
+                var previousElem = $("#note-" + newNote.previousId);
+                $(notesHtml).insertAfter(previousElem);
+            } else {
+                $("#js-notes-list").prepend(notesHtml);
+            }
+        }
+    }
+
+    function removeNotes(notes) {
+        for (var i = 0; i < notes.length; i++) {
+            var id = notes[i]._id;
+            $("#note-" + id).remove();
+        }
+    }
+
     function reloadNotes() {
+        console.log("reload");
         pollingObserver.reloadAll(replaceAllNotes);
     }
+
 
     /**
      * Load the notes in the correct order and set the html to the page
@@ -112,5 +141,10 @@ $(function () {
             return false;
         });
     }
+
+
+    function createNoteElements(notes) {
+    }
+
 
 });

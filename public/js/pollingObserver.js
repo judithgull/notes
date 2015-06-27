@@ -49,17 +49,30 @@
         restClient.getNotes(
             function (newNotes) {
                 if (listeners.length > 0 && hasChanged(newNotes)) {
+
+                    var insertedNotes = newNotes;
+                    //
+                    for (var i = 0; i < insertedNotes.length; i++) {
+                        if (i !== 0) {
+                            insertedNotes[i].previousId = insertedNotes[i - 1]._id;
+                        }
+                    }
+
+                    var updatedNotes = [];
+                    var removedNotes = notes;
+
                     notes = newNotes;
-                    notifyListeners();
+
+                    notifyListeners(insertedNotes, updatedNotes, removedNotes);
                 }
             }
         );
     }
 
-    function notifyListeners() {
+    function notifyListeners(insertedNotes, updatedNotes, removedNotes) {
         var i;
         for (i = 0; i < listeners.length; i++) {
-            listeners[i]();
+            listeners[i](insertedNotes, updatedNotes, removedNotes);
         }
     }
 
