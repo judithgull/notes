@@ -50,24 +50,44 @@
             function (newNotes) {
                 if (listeners.length > 0 && hasChanged(newNotes)) {
 
-                    var insertedNotes = newNotes;
-                    //
-                    for (var i = 0; i < insertedNotes.length; i++) {
-                        if (i !== 0) {
-                            insertedNotes[i].previousId = insertedNotes[i - 1]._id;
+                    var updatedNotes = [];
+                    var newNoteIds = getIdsAsProperties(newNotes);
+
+                    var removedNotes = [];
+                    for (var i = 0; i < notes.length; i ++) {
+                        var noteId = notes[i]._id;
+                        if (newNoteIds.hasOwnProperty(noteId) === false) {
+                            removedNotes.push(notes[i]);
                         }
                     }
 
-                    var updatedNotes = [];
-                    var removedNotes = notes;
+                    var insertedNotes = [];
+                    var origNotesIds = getIdsAsProperties(notes);
+                    for (var i = 0; i < newNotes.length; i ++) {
+                        var noteId = newNotes[i]._id;
+                        if (origNotesIds.hasOwnProperty(noteId) === false) {
+                            var noteToInsert = newNotes[i];
+                            if(i!=0) {
+                                noteToInsert.previousId = newNotes[i - 1]._id;
+                            }
+                            insertedNotes.push(noteToInsert);
+                        }
+                    }
 
                     notes = newNotes;
-
                     notifyListeners(insertedNotes, updatedNotes, removedNotes);
                 }
             }
         );
     }
+
+    function getIdsAsProperties(noteList){
+        var noteIds = {};
+        for (var i = 0; i < noteList.length; i++ ) {
+            noteIds[noteList[i]._id] = true;
+        }
+        return noteIds;
+    };
 
     function notifyListeners(insertedNotes, updatedNotes, removedNotes) {
         var i;
