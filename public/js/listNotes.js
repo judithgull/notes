@@ -8,8 +8,9 @@ $(function () {
     activateSortTab(notesSettings.getSortOrder());
     activateFinishedButton(notesSettings.isIncludeFinished());
 
-    moment.locale("en-US");
-    registerHandlebarsHelpers();
+    Handlebars.registerHelper('repeat', handlebarUtils.repeat);
+    Handlebars.registerHelper("formatDate", handlebarUtils.formatDate);
+
     var createNotesHtml = Handlebars.compile($("#notes-entry-template").html());
 
     pollingObserver.addChangeListener(function () {
@@ -87,7 +88,8 @@ $(function () {
             var ellipsestext = "...";
             var moretext = "more";
             var lesstext = "less";
-            $('.more').each(function () {
+
+                $('.more').each(function () {
                 var content = $(this).html();
                 if (content.length > showChar) {
                     var c = content.substr(0, showChar);
@@ -96,7 +98,8 @@ $(function () {
                     $(this).html(html);
                 }
             });
-            $(".morelink").click(function () {
+
+                $(".morelink").click(function () {
                 if ($(this).hasClass("less")) {
                     $(this).removeClass("less");
                     $(this).html(moretext);
@@ -113,38 +116,6 @@ $(function () {
 
     }
 
-    /**
-     * Helper functions for templating:
-     * repeat(n,block): repeat a block n times
-     * formatDate(date): display a date nicely
-     */
-    function registerHandlebarsHelpers() {
-        Handlebars.registerHelper('repeat', function (n, block) {
-            var res = "";
-            for (var i = 0; i < n; ++i)
-                res += block.fn(i);
-            return res;
-        });
-
-        function formatDate(datetime) {
-            var isToday = function (mom) {
-                return mom.day() === moment().day()
-                    && mom.month() === moment().month()
-                    && mom.year() === moment().year();
-            };
-
-            if (!datetime) {
-                return "someday";
-            }
-            var m = moment(JSON.parse(datetime));
-            if (isToday(m)) {
-                return "today";
-            }
-            return m.fromNow();
-        }
-
-        Handlebars.registerHelper("formatDate", formatDate);
-    }
 
 
 });
