@@ -21,7 +21,9 @@
         });
     }
 
-    function getNotes(sortOrder, includeFinished, callback) {
+    function getNotes(callback) {
+        var sortOrder = notesSettings.getSortOrder();
+        var includeFinished = notesSettings.isIncludeFinished();
         var queryString = "?sorting=" + sortOrder + "&includeFinished=" + includeFinished;
         var url = notesPath + queryString;
 

@@ -6,8 +6,6 @@
     "use strict";
 
     var notes = [];
-    var sortOrder = "sort-by-importance";
-    var includeFinished = true;
     var listeners = [];
 
     /**
@@ -22,22 +20,6 @@
             callback();
             setTimeout(p, interval);
         })();
-    }
-
-    function setSortOrder(newSortOrder) {
-        sortOrder = newSortOrder;
-    }
-
-    function setIncludeFinished(newIncludeFinished) {
-        includeFinished = newIncludeFinished;
-    }
-
-    function getSortOrder() {
-        return sortOrder;
-    }
-
-    function getIncludeFinished() {
-        return includeFinished;
     }
 
     function addChangeListener(listener) {
@@ -58,8 +40,6 @@
 
     function getNotesFromServer() {
         restClient.getNotes(
-            getSortOrder(),
-            getIncludeFinished(),
             function (newNotes) {
                 if (listeners.length > 0 && hasChanged(newNotes)) {
                     notes = newNotes;
@@ -111,8 +91,6 @@
 
     window.pollingObserver = {
         getNotes: getNotes,
-        setSortOrder: setSortOrder,
-        setIncludeFinished: setIncludeFinished,
         addChangeListener: addChangeListener,
         removeChangeListener: removeChangeListener
     };

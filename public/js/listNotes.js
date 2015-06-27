@@ -52,12 +52,8 @@ $(function () {
      * Load the notes in the correct order and set the html to the page
      * */
     function reloadNotes() {
-        var sortOrderId = $(".tab-item--active").children().first().attr("id");
-        var isShowFinished = Boolean($(".btn--active").length);
 
         restClient.getNotes(
-            sortOrderId,
-            isShowFinished,
             function (notes) {
 
             document.getElementById("js-notes-list").innerHTML = createNotesHtml(notes);
