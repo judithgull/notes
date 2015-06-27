@@ -1,6 +1,13 @@
 ;
 $(function () {
     "use strict";
+
+    var showFinishedBtn = $("#show-finished-btn");
+
+    //load initial query settings
+    activateSortTab(notesSettings.getSortOrder());
+    activateFinishedButton(notesSettings.isIncludeFinished());
+
     moment.locale("en-US");
     registerHandlebarsHelpers();
     var createNotesHtml = Handlebars.compile($("#notes-entry-template").html());
@@ -10,29 +17,36 @@ $(function () {
     });
 
 
+    function activateFinishedButton(showFinished) {
+        if (showFinished !== showFinishedBtn.hasClass("btn--active")) {
+            showFinishedBtn.toggleClass("btn--active");
+        }
+    }
+
     /**
-     * Register Click-Handler on Sort Tabs
-     * */
-    $("#sort-tabs").on("click", function () {
-        var selectedId = event.toElement.id;
-        activateTab(selectedId);
+     * Register Click-Handler on Finished Button
+     */
+    showFinishedBtn.on("click", function () {
+        notesSettings.toggleIncludeFinished();
+        activateFinishedButton(notesSettings.isIncludeFinished());
         reloadNotes();
     });
 
-    function activateTab(id) {
+    function activateSortTab(id) {
         var activeMarker = "tab-item--active";
         $("." + activeMarker).toggleClass(activeMarker);
         $("#" + id).parent().toggleClass(activeMarker);
     }
 
     /**
-     * Register Click-Handler on Finished Button
-     */
-    $("#show-finished-btn").on("click", function () {
-        $("#show-finished-btn").toggleClass("btn--active");
+     * Register Click-Handler on Sort Tabs
+     * */
+    $("#sort-tabs").on("click", function () {
+        var selectedId = event.toElement.id;
+        notesSettings.setSortOrder(selectedId);
+        activateSortTab(selectedId);
         reloadNotes();
     });
-
 
     /**
      * Load the notes in the correct order and set the html to the page
