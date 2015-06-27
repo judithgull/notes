@@ -34,8 +34,15 @@
         }
     }
 
-    function getNotes() {
-        return notes;
+    function reloadAll(callback) {
+        restClient.getNotes(
+            function (newNotes) {
+                notes = newNotes;
+                if (callback) {
+                    callback(notes);
+                }
+            }
+        );
     }
 
     function getNotesFromServer() {
@@ -90,7 +97,7 @@
     }
 
     window.pollingObserver = {
-        getNotes: getNotes,
+        reloadAll: reloadAll,
         addChangeListener: addChangeListener,
         removeChangeListener: removeChangeListener
     };
