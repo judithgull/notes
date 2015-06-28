@@ -69,6 +69,10 @@ $(function () {
             } else {
                 $("#js-notes-list").prepend(notesHtml);
             }
+
+            var elem = $("#note-" + newNote._id);
+            addClickHandler(elem);
+
         }
     }
 
@@ -101,20 +105,7 @@ $(function () {
 
         document.getElementById("js-notes-list").innerHTML = createNotesHtml(notes);
 
-        /**
-         * Register Handler for finished checkboxes
-         */
-        var notesCheckboxes = $("#js-notes-list").find("[type=\"checkbox\"]");
-        notesCheckboxes.on("click", function () {
-
-            var checkbox = $("#" + this.id);
-            var isChecked = checkbox.prop("checked") ? true : false;
-            var id = checkbox.parents("li").attr("data-id");
-
-            var completionDate = (isChecked) ? new Date() : null;
-
-            restClient.updateCompletionDate(id, completionDate, reloadNotes);
-        });
+        addClickHandler($("#js-notes-list"));
 
         /**
          * Register Handler on Edit Button
@@ -154,9 +145,19 @@ $(function () {
         });
     }
 
+    function addClickHandler(searchRoot) {
 
-    function createNoteElements(notes) {
+        var notesCheckboxes = searchRoot.find("[type=\"checkbox\"]");
+
+        notesCheckboxes.on("click", function () {
+
+            var checkbox = $("#" + this.id);
+            var isChecked = checkbox.prop("checked") ? true : false;
+            var id = checkbox.parents("li").attr("data-id");
+
+            var completionDate = (isChecked) ? new Date() : null;
+
+            restClient.updateCompletionDate(id, completionDate, reloadNotes);
+        });
     }
-
-
 });
