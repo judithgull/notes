@@ -53,7 +53,7 @@
                     var newNoteIds = getIdMap(newNotes);
 
                     var removedNotes = [];
-                    for (var i = 0; i < notes.length; i ++) {
+                    for (var i = 0; i < notes.length; i++) {
                         if (!newNoteIds.hasOwnProperty(notes[i]._id)) {
                             removedNotes.push(notes[i]);
                         }
@@ -74,11 +74,13 @@
                             insertedNotes.push(newNote);
                         } else {
                             var origNote = origNotesIds[noteId];
-                            if (!equals(origNote, newNote) && !isSortingRelevantUpdate(origNote, newNote)) {
-                                updatedNotes.push(newNote);
-                            } else {
-                                removedNotes.push(newNote);
-                                insertedNotes.push(newNote);
+                            if (!equals(origNote, newNote)) {
+                                if (!isSortingRelevantUpdate(origNote, newNote)) {
+                                    updatedNotes.push(newNote);
+                                } else {
+                                    removedNotes.push(newNote);
+                                    insertedNotes.push(newNote);
+                                }
                             }
                         }
                     }
@@ -94,7 +96,7 @@
 
     function getIdMap(noteList) {
         var noteIds = {};
-        for (var i = 0; i < noteList.length; i++ ) {
+        for (var i = 0; i < noteList.length; i++) {
             var note = noteList[i];
             noteIds[note._id] = note;
         }
