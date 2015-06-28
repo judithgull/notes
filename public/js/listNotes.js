@@ -82,6 +82,8 @@ $(function () {
             var element = $("#note-" + newNote._id);
 
             updateIfChanged(element, ".note-title", newNote.title);
+            updateIfChanged(element, ".note-description", newNote.description);
+            addShowMoreHandlers(element);
 
         }
     }
