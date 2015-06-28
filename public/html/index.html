@@ -19,8 +19,8 @@
                     <input id="note-finished-{{_id}}" type="checkbox"
                            {{#if completionDate.length}} checked="checked" {{/if}}
                     >
-                    <label for="note-finished-{{_id}}">Finished {{#if completionDate.length}}[{{{formatDate
-                        completionDate}}}]{{/if}}</label>
+                    <label id="note-finished-label-{{_id}}" for="note-finished-{{_id}}">{{{formatFinishedText
+                        completionDate}}}</label>
                 </div>
                 <div class="l-content">
                     <h3 class="note-title t-title">{{title}}</h3>

@@ -10,7 +10,7 @@ $(function () {
 
     Handlebars.registerHelper('repeat', handlebarUtils.repeat);
     Handlebars.registerHelper("formatDate", handlebarUtils.formatDate);
-
+    Handlebars.registerHelper("formatFinishedText", handlebarUtils.formatFinishedText);
     var createNotesHtml = Handlebars.compile($("#notes-entry-template").html());
 
     reloadNotes();
@@ -89,7 +89,6 @@ $(function () {
             updateText(element, updatedFields, "description", ".note-description");
             updateText(element, updatedFields, "title", ".note-title");
 
-            addShowMoreHandlers(element);
 
             if (updatedFields.hasOwnProperty("dueDate")) {
                 var formatedDate = handlebarUtils.formatDate(updatedFields.dueDate);
@@ -99,12 +98,16 @@ $(function () {
             if (updatedFields.hasOwnProperty("completionDate")) {
                 var checkbox = element.find("#note-finished-" + updatedFields._id);
                 var isChecked = checkbox.prop("checked") ? true : false;
-                var hasCompletionDate = updatedFields.completionDate.length>0?true:false;
+                var hasCompletionDate = updatedFields.completionDate.length > 0 ? true : false;
 
                 if (isChecked !== hasCompletionDate) {
                     checkbox.prop("checked", hasCompletionDate);
+                    var label = $("#note-finished-label-" + updatedFields._id);
+                    label.text(handlebarUtils.formatFinishedText(updatedFields.completionDate));
                 }
             }
+
+            addShowMoreHandlers(element);
         }
     }
 

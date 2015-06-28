@@ -13,6 +13,15 @@
         return res;
     }
 
+    function formatFinishedText(completionDate) {
+        var text = "Finished";
+
+        if (completionDate.length > 0) {
+            text += " [" + formatDate(completionDate) + "]";
+        }
+        return text;
+    }
+
     function formatDate(datetime) {
         var isToday = function (mom) {
             return mom.day() === moment().day()
@@ -36,6 +45,10 @@
          * display a date nicely
          * */
         formatDate: formatDate,
+        /**
+         * display finished text
+         * */
+        formatFinishedText: formatFinishedText,
         /**
          * repeat(n,block): repeat a block n times
          * */
