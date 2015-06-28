@@ -71,7 +71,8 @@ $(function () {
             }
 
             var elem = $("#note-" + newNote._id);
-            addClickHandler(elem);
+            addFinishedClickHandler(elem);
+            addEditClickHandler(elem);
 
         }
     }
@@ -105,16 +106,9 @@ $(function () {
 
         document.getElementById("js-notes-list").innerHTML = createNotesHtml(notes);
 
-        addClickHandler($("#js-notes-list"));
-
-        /**
-         * Register Handler on Edit Button
-         * */
-        var editButtons = $("#js-notes-list").find("button");
-        editButtons.on("click", function () {
-            var id = $("#" + this.id).parents("li").attr("data-id");
-            location.href = "notes/" + id;
-        });
+        var notesList = $("#js-notes-list");
+        addFinishedClickHandler(notesList);
+        addEditClickHandler(notesList);
 
         var showChar = 200;
         var ellipsestext = "...";
@@ -145,7 +139,15 @@ $(function () {
         });
     }
 
-    function addClickHandler(searchRoot) {
+    function addEditClickHandler(searchRoot) {
+        var editButtons = searchRoot.find("button");
+        editButtons.on("click", function () {
+            var id = $("#" + this.id).parents("li").attr("data-id");
+            location.href = "notes/" + id;
+        });
+    }
+
+    function addFinishedClickHandler(searchRoot) {
 
         var notesCheckboxes = searchRoot.find("[type=\"checkbox\"]");
 
