@@ -95,6 +95,16 @@ $(function () {
                 var formatedDate = handlebarUtils.formatDate(updatedFields.dueDate);
                 element.find(".note-due-date").text(formatedDate);
             }
+
+            if (updatedFields.hasOwnProperty("completionDate")) {
+                var checkbox = element.find("#note-finished-" + updatedFields._id);
+                var isChecked = checkbox.prop("checked") ? true : false;
+                var hasCompletionDate = updatedFields.completionDate.length>0?true:false;
+
+                if (isChecked !== hasCompletionDate) {
+                    checkbox.prop("checked", hasCompletionDate);
+                }
+            }
         }
     }
 
