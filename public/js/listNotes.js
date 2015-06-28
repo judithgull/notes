@@ -73,6 +73,7 @@ $(function () {
             var elem = $("#note-" + newNote._id);
             addFinishedClickHandler(elem);
             addEditClickHandler(elem);
+            addShowMoreHandlers(elem);
 
         }
     }
@@ -109,13 +110,17 @@ $(function () {
         var notesList = $("#js-notes-list");
         addFinishedClickHandler(notesList);
         addEditClickHandler(notesList);
+        addShowMoreHandlers(notesList);
 
+    }
+
+    function addShowMoreHandlers(searchRoot) {
         var showChar = 200;
         var ellipsestext = "...";
         var moretext = "more";
         var lesstext = "less";
 
-        $('.more').each(function () {
+        searchRoot.find($('.more')).each(function () {
             var content = $(this).html();
             if (content.length > showChar) {
                 var c = content.substr(0, showChar);
@@ -125,7 +130,7 @@ $(function () {
             }
         });
 
-        $(".morelink").click(function () {
+        searchRoot.find($(".morelink")).click(function () {
             if ($(this).hasClass("less")) {
                 $(this).removeClass("less");
                 $(this).html(moretext);
