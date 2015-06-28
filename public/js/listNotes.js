@@ -87,6 +87,11 @@ $(function () {
                 element.find(".importanceRating-wrap").html(impHtml);
             }
             updateText(element, updatedFields, "description", ".note-description");
+
+            if (updatedFields.hasOwnProperty("description")) {
+                addShowMoreHandlers(element);
+            }
+
             updateText(element, updatedFields, "title", ".note-title");
 
 
@@ -107,7 +112,6 @@ $(function () {
                 }
             }
 
-            addShowMoreHandlers(element);
         }
     }
 
