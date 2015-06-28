@@ -54,8 +54,7 @@
 
                     var removedNotes = [];
                     for (var i = 0; i < notes.length; i ++) {
-                        var noteId = notes[i]._id;
-                        if (!newNoteIds.hasOwnProperty(noteId)) {
+                        if (!newNoteIds.hasOwnProperty(notes[i]._id)) {
                             removedNotes.push(notes[i]);
                         }
                     }
@@ -63,19 +62,23 @@
                     var insertedNotes = [];
                     var updatedNotes = [];
                     var origNotesIds = getIdMap(notes);
-                    for (var i = 0; i < newNotes.length; i ++) {
+                    for (i = 0; i < newNotes.length; i++) {
                         var newNote = newNotes[i];
                         var noteId = newNote._id;
 
+                        if (i != 0) {
+                            newNote.previousId = newNotes[i - 1]._id;
+                        }
+
                         if (!origNotesIds.hasOwnProperty(noteId)) {
-                            if(i!=0) {
-                                newNote.previousId = newNotes[i - 1]._id;
-                            }
                             insertedNotes.push(newNote);
                         } else {
                             var origNote = origNotesIds[noteId];
-                            if (!equals(origNote, newNote)) {
+                            if (!equals(origNote, newNote) && !isSortingRelevantUpdate(origNote, newNote)) {
                                 updatedNotes.push(newNote);
+                            } else {
+                                removedNotes.push(newNote);
+                                insertedNotes.push(newNote);
                             }
                         }
                     }
@@ -90,7 +93,7 @@
     function getIdMap(noteList) {
         var noteIds = {};
         for (var i = 0; i < noteList.length; i++ ) {
-            var note = noteList[i]
+            var note = noteList[i];
             noteIds[note._id] = note;
         }
         return noteIds;
@@ -120,6 +123,16 @@
             }
             return false;
         }
+    }
+
+    function isSortingRelevantUpdate(n1, n2) {
+        var sortOrder = notesSettings.getSortOrder();
+        if (sortOrder === "sort-by-completion" && n1.completionDate !== n2.completionDate) {
+            return true;
+        } else if (sortOrder === "sort-by-importance" && n1.importance !== n2.importance) {
+            return true;
+        }
+        return false;
     }
 
     function equals(n1, n2) {
