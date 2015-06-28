@@ -1,14 +1,17 @@
 var Datastore = require('nedb');
 var db = new Datastore({filename: './data/notes.db', autoload: true});
 
-function Note(title, description, dueDate, importance, completionDate) {
+function Note(title, description, dueDate, importance, creationDate, completionDate) {
     this.title = String(title);
     this.description = String(description);
-    this.creationDate = stringifyDate(new Date());
     this.dueDate = stringifyDate(dueDate);
     this.importance = Number(importance);
 
     if (arguments.length > 4) {
+        this.creationDate = stringifyDate(creationDate);
+    }
+
+    if (arguments.length > 5) {
         this.completionDate = stringifyDate(completionDate);
     }
 }
@@ -49,7 +52,7 @@ function publicGetNote(id, callback) {
 }
 
 function publicAddNote(title, description, dueDate, importance, completionDate, callback) {
-    var note = new Note(title, description, dueDate, importance, completionDate);
+    var note = new Note(title, description, dueDate, importance, new Date(), completionDate);
 
     db.insert(note, function (err, newNote) {
         if (callback) {
