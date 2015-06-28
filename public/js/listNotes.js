@@ -78,9 +78,20 @@ $(function () {
     function updateNotes(notes) {
         for (var i = 0; i < notes.length; i++) {
             var newNote = notes[i];
-            var notesHtml = createNotesHtml([newNote]);
+
             var element = $("#note-" + newNote._id);
-            element.replaceWith(notesHtml);
+
+            updateIfChanged(element, ".note-title", newNote.title);
+
+        }
+    }
+
+    function updateIfChanged(searchRoot, searchClass, newValue) {
+        var elem = searchRoot.find(searchClass).first();
+        var origValue = elem.text();
+
+        if (origValue !== newValue) {
+            elem.text(newValue);
         }
     }
 
