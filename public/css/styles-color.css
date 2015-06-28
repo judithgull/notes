@@ -36,6 +36,10 @@ ul {
 }
 
 .l-flex {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
     display: flex;
     height: auto;
     align-items: flex-start;
