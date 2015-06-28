@@ -97,9 +97,6 @@ module.exports.updateNote = function (req, res) {
 };
 
 function isCompletionDateUpdate(body) {
-    if (body.hasOwnProperty("completionDate")) {
-        return true;
-    }
-    return false;
+    return !!body.hasOwnProperty("completionDate");
 }
 
