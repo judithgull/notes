@@ -77,24 +77,35 @@ $(function () {
 
     function updateNotes(notes) {
         for (var i = 0; i < notes.length; i++) {
-            var newNote = notes[i];
+            var updatedFields = notes[i];
+            console.log(updatedFields);
 
-            var element = $("#note-" + newNote._id);
+            var element = $("#note-" + updatedFields._id);
 
-            updateIfChanged(element, ".note-title", newNote.title);
-            updateIfChanged(element, ".note-description", newNote.description);
+            if (updatedFields.hasOwnProperty("importance")) {
+                var impHtml = createImportanceHtml(updatedFields.importance);
+                element.find(".importanceRating-wrap").html(impHtml);
+            }
+            updateText(element, updatedFields, "description", ".note-description");
+            updateText(element, updatedFields, "title", ".note-title");
+
             addShowMoreHandlers(element);
 
         }
     }
 
-    function updateIfChanged(searchRoot, searchClass, newValue) {
-        var elem = searchRoot.find(searchClass).first();
-        var origValue = elem.text();
-
-        if (origValue !== newValue) {
-            elem.text(newValue);
+    function updateText(searchRoot, updatedFields, property, searchClass) {
+        if (updatedFields.hasOwnProperty(property)) {
+            searchRoot.find(searchClass).text(updatedFields[property]);
         }
+    }
+
+    function createImportanceHtml(newValue) {
+        var impHtml = "";
+        for (var i = 0; i < newValue; i++) {
+            impHtml = impHtml + "<img src=\"../img/bolt-on.svg\">";
+        }
+        return impHtml;
     }
 
     function removeNotes(notes) {

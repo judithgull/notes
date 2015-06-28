@@ -76,7 +76,8 @@
                             var origNote = origNotesIds[noteId];
                             if (!equals(origNote, newNote)) {
                                 if (!isSortingRelevantUpdate(origNote, newNote)) {
-                                    updatedNotes.push(newNote);
+                                    var updatedFields = getUpdatedFields(origNote, newNote);
+                                    updatedNotes.push(updatedFields);
                                 } else {
                                     removedNotes.push(newNote);
                                     insertedNotes.push(newNote);
@@ -119,6 +120,31 @@
         }
         return false;
     }
+
+    function getUpdatedFields(oldNote, newNote) {
+        var updatedFields = {};
+        updatedFields._id = newNote._id;
+
+        function addIfChanged(property) {
+            var oldValue = oldNote[property];
+            var newValue = newNote[property];
+            if (oldValue !== newValue) {
+                updatedFields[property] = newNote[property];
+            }
+        }
+
+        addIfChanged("title");
+        addIfChanged("description");
+        addIfChanged("importance");
+        addIfChanged("dueDate");
+        addIfChanged("completionDate");
+        addIfChanged("creationDate");
+
+        return updatedFields;
+
+    }
+
+
 
     function equals(n1, n2) {
         return n1.id === n2.id
