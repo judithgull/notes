@@ -36,7 +36,6 @@
         }
 
         return moment(today).to(dateAsDay);
-        ;
     }
 
 
