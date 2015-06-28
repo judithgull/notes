@@ -33,9 +33,9 @@ function publicGetNotes(sortOrderStr, includeFinished, callback) {
 
 function getSortOrder(sortOrderStr) {
     if (sortOrderStr === "sort-by-completion") {
-        return {completionDate: 1};
+        return {completionDate: -1};
     } else if (sortOrderStr === "sort-by-creation") {
-        return {creationDate: 1};
+        return {creationDate: -1};
     } else if (sortOrderStr === "sort-by-importance") {
         return {importance: -1};
     } else {
