@@ -91,6 +91,10 @@ $(function () {
 
             addShowMoreHandlers(element);
 
+            if (updatedFields.hasOwnProperty("dueDate")) {
+                var formatedDate = handlebarUtils.formatDate(updatedFields.dueDate);
+                element.find(".note-due-date").text(formatedDate);
+            }
         }
     }
 
