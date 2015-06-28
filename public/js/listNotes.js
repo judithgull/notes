@@ -78,7 +78,6 @@ $(function () {
     function updateNotes(notes) {
         for (var i = 0; i < notes.length; i++) {
             var updatedFields = notes[i];
-            console.log(updatedFields);
 
             var element = $("#note-" + updatedFields._id);
 
