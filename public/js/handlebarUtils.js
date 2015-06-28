@@ -23,20 +23,20 @@
     }
 
     function formatDate(datetime) {
-        var isToday = function (mom) {
-            return mom.day() === moment().day()
-                && mom.month() === moment().month()
-                && mom.year() === moment().year();
-        };
-
         if (!datetime) {
             return "someday";
         }
-        var m = moment(JSON.parse(datetime));
-        if (isToday(m)) {
+
+        var dayFormat = "YYYY-MM-DD";
+        var dateAsDay = moment(JSON.parse(datetime)).format(dayFormat);
+        var today = moment().format(dayFormat);
+
+        if (today === dateAsDay) {
             return "today";
         }
-        return m.fromNow();
+
+        return moment(today).to(dateAsDay);
+        ;
     }
 
 
