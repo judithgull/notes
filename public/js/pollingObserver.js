@@ -48,7 +48,7 @@
     function getNotesFromServer() {
         restClient.getNotes(
             function (newNotes) {
-                if (listeners.length > 0 && hasChanged(newNotes)) {
+                if (listeners.length > 0) {
 
                     var newNoteIds = getIdMap(newNotes);
 
@@ -84,7 +84,9 @@
                     }
 
                     notes = newNotes;
-                    notifyListeners(insertedNotes, updatedNotes, removedNotes);
+                    if (insertedNotes.length > 0 || updatedNotes.length > 0 || removedNotes.length > 0) {
+                        notifyListeners(insertedNotes, updatedNotes, removedNotes);
+                    }
                 }
             }
         );
@@ -106,25 +108,6 @@
         }
     }
 
-
-    function hasChanged(newNotes) {
-        var origNotes = notes;
-        newNotes.sort(idComparator);
-        origNotes.sort(idComparator);
-
-        if (newNotes.length !== origNotes.length) {
-            return true;
-        } else {
-            var i;
-            for (i = 0; i < newNotes.length; i++) {
-                if (!equals(newNotes[i], origNotes[i])) {
-                    return true;
-                }
-            }
-            return false;
-        }
-    }
-
     function isSortingRelevantUpdate(n1, n2) {
         var sortOrder = notesSettings.getSortOrder();
         if (sortOrder === "sort-by-completion" && n1.completionDate !== n2.completionDate) {
@@ -143,10 +126,6 @@
             && n1.dueDate === n2.dueDate
             && n1.completionDate === n2.completionDate
             && n1.creationDate === n2.creationDate
-    }
-
-    function idComparator(note1, note2) {
-        return note1.id - note2.id;
     }
 
     window.pollingObserver = {
