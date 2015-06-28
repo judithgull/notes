@@ -52,8 +52,8 @@ $(function () {
     /**
      * Register Click-Handler on Sort Tabs
      * */
-    $("#sort-tabs").on("click", function () {
-        var selectedId = event.toElement.id;
+    $("#sort-tabs").children().on("click", function () {
+        var selectedId = $(this).find("a").attr("id");
         notesSettings.setSortOrder(selectedId);
         activateSortTab(selectedId);
         reloadNotes();
