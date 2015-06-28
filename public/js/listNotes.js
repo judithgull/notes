@@ -71,10 +71,7 @@ $(function () {
             }
 
             var elem = $("#note-" + newNote._id);
-            addFinishedClickHandler(elem);
-            addEditClickHandler(elem);
-            addShowMoreHandlers(elem);
-
+            addClickHandlers(elem);
         }
     }
 
@@ -94,24 +91,21 @@ $(function () {
         }
     }
 
-    function reloadNotes() {
-        console.log("reload");
-        pollingObserver.reloadAll(replaceAllNotes);
-    }
-
-
     /**
      * Load the notes in the correct order and set the html to the page
      * */
-    function replaceAllNotes(notes) {
+    function reloadNotes() {
+        pollingObserver.reloadAll(function (notes) {
+            var notesList = $("#js-notes-list");
+            notesList.html(createNotesHtml(notes));
+            addClickHandlers(notesList);
+        });
+    }
 
-        document.getElementById("js-notes-list").innerHTML = createNotesHtml(notes);
-
-        var notesList = $("#js-notes-list");
-        addFinishedClickHandler(notesList);
-        addEditClickHandler(notesList);
-        addShowMoreHandlers(notesList);
-
+    function addClickHandlers(searchRoot) {
+        addFinishedClickHandler(searchRoot);
+        addEditClickHandler(searchRoot);
+        addShowMoreHandlers(searchRoot);
     }
 
     function addShowMoreHandlers(searchRoot) {
